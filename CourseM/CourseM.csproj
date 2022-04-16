@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\background.jpg" />
+    <None Remove="Resources\icon.jpg" />
+    <None Remove="Resources\icon2.jpg" />
+    <None Remove="Resources\info.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\background.jpg" />
+    <Resource Include="Resources\icon.jpg" />
+    <Resource Include="Resources\icon2.jpg" />
+    <Resource Include="Resources\info.jpg" />
+  </ItemGroup>
+
+</Project>
