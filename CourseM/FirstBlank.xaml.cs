@@ -28,9 +28,11 @@ namespace CourseM
         private readonly string PATH;
         DateTime dateTime;
         private string genderType;
+
         public FirstBlank(MainWindow mainwin, Blank blank, string path)
         {
             InitializeComponent();
+
             this.mainwin = mainwin;
             this.blank = blank;
 
@@ -42,63 +44,15 @@ namespace CourseM
             Button butInfo = buttonInfo;
             SetButtonToolTip(butInfo);
         }
-        private void Create_Client(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
-            if (name.Text == "" || surname.Text == "" || numOfPass.Text == "" || genderType == "" || sum.Text == ""
-                || categoryOfDeposit.SelectedItem == null || (termDeposit.SelectedItem == null && ((TextBlock)categoryOfDeposit.SelectedItem).Text == "Term deposit"))
-            {
-                MessageBox.Show("You didn`t fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            int temp_int;
-            if (!int.TryParse(numOfPass.Text, out temp_int) || numOfPass.Text.Length != 9)
-            {
-                MessageBox.Show("Passport No has to be none-digit number!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            double temp_double;
-            if (!double.TryParse(sum.Text, out temp_double) || sum.Text.Length < 5 || sum.Text.Length > 9)
-            {
-                MessageBox.Show("We cannot accept that sum. Reread the conditions of our bank again!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            string catOfDeposit = ((TextBlock)categoryOfDeposit.SelectedItem).Text;
-            string termOfDep;
-            if (catOfDeposit == "Demand deposit")
-            {
-                termOfDep = "No term";
-            }
-            else
-            {
-                termOfDep = ((TextBlock)termDeposit.SelectedItem).Text;
-            }
-
-            Client temp_client = new Client(name.Text, surname.Text, dateTime, numOfPass.Text, genderType, Convert.ToDouble(sum.Text), catOfDeposit, termOfDep, "weq");
-            mainwin.Clients.Add(temp_client);
-            try
-            {
-                _fileIO.SaveData(mainwin.Clients);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                blank.Close();
-            }
-            blank.Close();
-
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        public void Create_Client()
         {
-            _fileIO = new FileIO(PATH);
-        }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            blank.Close();
+            
+
         }
 
         private void datePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -163,6 +117,10 @@ namespace CourseM
         private void OpenNextPage(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(blank.secondBlank);
+        }
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            blank.Close();
         }
     }
 }
