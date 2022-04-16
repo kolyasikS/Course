@@ -25,11 +25,6 @@ namespace CourseM
         private DateTime birthDate;
  
 
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
         public DateTime LastOperation
         {
             get { return lastOperation; }
@@ -133,7 +128,7 @@ namespace CourseM
 
 
 
-        public Client(string name, string sname, DateTime bDate, string passNo, string gen, double s, string catOfDep, string termOfDep, string pass)
+        public Client(string name, string sname, DateTime bDate, string passNo, string gen, double s, string catOfDep, string termOfDep)
         {
 
             NameClient = name;
@@ -153,7 +148,6 @@ namespace CourseM
             lastOperation = DateTime.Now;
             Info = NameClient + " " + Surname;
             amountOfYears = 1;
-            password = pass;
         }
 
         public Client(Client cl)
@@ -173,7 +167,6 @@ namespace CourseM
             IsEndedTerm = cl.IsEndedTerm;
             AmountOfYears = cl.AmountOfYears;
             lastOperation = cl.LastOperation;
-            password = cl.Password;
         }
 
         public Client()
