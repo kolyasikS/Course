@@ -21,6 +21,8 @@ namespace CourseM
 {
     public partial class MainWindow : Window
     {
+        private int CHECK;
+
         private BindingList<Client> clients;            
         public BindingList<Client> Clients
         {
