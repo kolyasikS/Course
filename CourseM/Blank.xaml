@@ -8,7 +8,7 @@
         ResizeMode="NoResize"
         ShowInTaskbar="True"
         WindowStartupLocation="CenterOwner" 
-        FocusManager.FocusedElement="{Binding ElementName=leftMarginTextBox}" Loaded="Window_Loaded" Height="364">
+        FocusManager.FocusedElement="{Binding ElementName=leftMarginTextBox}" Loaded="Window_Loaded" Height="364" Width="270">
     <Grid Margin="10">
         <Grid.Resources>
             <!-- Default settings for controls -->
@@ -96,9 +96,13 @@
             </Button.Template>
         </Button>
 
-        <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,2" Grid.RowSpan="2" Width="150">
+        <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,2" Width="154">
             <Button x:Name="okButton" Click="Create_Client" Content="OK"/>
-            <Button x:Name="cancelButton" Content="Cancel" Click="CancelButton_Click"/>
+            <Button x:Name="nextPage" Click="OpenNextPage" Content=""/>
+            <Canvas>
+                <Image Source="Resources/next.png" Width="43" Height="34" Canvas.Left="-53" Canvas.Top="-2" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </Canvas>
+            <!--<Button x:Name="cancelButton" Content="Cancel" Click="CancelButton_Click"/>-->
         </StackPanel>
     </Grid>
 </Window>

@@ -73,7 +73,7 @@ namespace CourseM
                 termOfDep = ((TextBlock)termDeposit.SelectedItem).Text;
             }
 
-            Client temp_client = new Client(name.Text, surname.Text, dateTime, numOfPass.Text, genderType, Convert.ToDouble(sum.Text), catOfDeposit, termOfDep);
+            Client temp_client = new Client(name.Text, surname.Text, dateTime, numOfPass.Text, genderType, Convert.ToDouble(sum.Text), catOfDeposit, termOfDep,);
             mainwin.Clients.Add(temp_client);
             try
             {
@@ -155,6 +155,11 @@ namespace CourseM
 
 
             butInfo.ToolTip = toolTip;
+        }
+
+        private void OpenNextPage(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
