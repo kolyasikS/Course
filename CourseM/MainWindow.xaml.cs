@@ -27,6 +27,7 @@ namespace CourseM
             get { return clients; }
             set { clients = value; }
         }
+        private bool isAdmin;
 
         private readonly string PATH = $"{Environment.CurrentDirectory}\\Bank.json";
         private FileIO _fileIO;
@@ -39,12 +40,21 @@ namespace CourseM
 
             InitializeComponent();
 
+            SetPositionInScreen();
             Clients ??= new BindingList<Client>();
         }
         private void Add_Client(object sender, RoutedEventArgs e)
         {
             Blank blank = new Blank(this, PATH);
             blank.ShowDialog();
+        }
+
+        private void SetPositionInScreen()
+        {
+            double screenHeight = SystemParameters.FullPrimaryScreenHeight;
+            double screenWidth = SystemParameters.FullPrimaryScreenWidth;
+            this.Top = (screenHeight - this.Height) / 2;
+            this.Left = (screenWidth - this.Width) / 2;
         }
 
         void UpdateDemandDeposit(Client _client, float interestRate)
@@ -226,6 +236,20 @@ namespace CourseM
                 + "After " + tempTermDeposit + " you give: " + sumAfterTerm;
             lastOperation.Content = "Last operation was carried out at\n";
             lastOperation.Content += temp.LastOperation.ToString();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Enter enter = new Enter(this);
+            enter.ShowDialog();
+            if (enter.isAdmin == 1)
+            {
+                isAdmin = true;
+            }
+            else if (enter.isAdmin == 0)
+            {
+                isAdmin = false;
+            }
         }
     }
     

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CourseM" d:DataContext="{d:DesignInstance Type=local:App}"
         mc:Ignorable="d"
         Icon="Resources\icon2.jpg"
-        Title="Withdraw" Height="137" Width="290">
+        Title="Withdraw" Height="137" ResizeMode="NoResize" Width="290">
     <Grid>
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
