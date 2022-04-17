@@ -32,6 +32,8 @@ namespace CourseM
 
             _fileIO = new FileIO(path);
 
+            SetPositionInScreen();
+
         }
 
         private void ToWithdraw(object sender, RoutedEventArgs e)
@@ -58,6 +60,13 @@ namespace CourseM
             SetClientInfo(client);
 
             return;
+        }
+        private void SetPositionInScreen()
+        {
+            double screenHeight = SystemParameters.FullPrimaryScreenHeight;
+            double screenWidth = SystemParameters.FullPrimaryScreenWidth;
+            this.Top = (screenHeight - this.Height) / 2;
+            this.Left = (screenWidth - this.Width) / 2;
         }
         private void ToDeposit(object sender, RoutedEventArgs e)
         {

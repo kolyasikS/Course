@@ -27,8 +27,6 @@ namespace CourseM
         private FileIO _fileIO;
         private readonly string PATH;
         DateTime dateTime;
-        private string genderType;
-
         public SecondBlank(FirstBlank firstBlank, MainWindow mainwin, Blank blank, string path)
         {
             InitializeComponent();
@@ -43,12 +41,19 @@ namespace CourseM
         }
         private void CreateClient(object sender, RoutedEventArgs e)
         {
+            string genderType = firstBlank.genderType;
+
             if (firstBlank.name.Text == "" || firstBlank.surname.Text == "" || firstBlank.numOfPass.Text == "" 
                 || genderType == "" || firstBlank.sum.Text == ""
                 || firstBlank.categoryOfDeposit.SelectedItem == null || (firstBlank.termDeposit.SelectedItem == null 
                 && ((TextBlock)firstBlank.categoryOfDeposit.SelectedItem).Text == "Term deposit"))
             {
                 MessageBox.Show("You didn`t fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (passwordField.Password.Length < 6)
+            {
+                MessageBox.Show("Password must contain >5 symbols!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -81,7 +86,7 @@ namespace CourseM
 
             Client temp_client = new Client(firstBlank.name.Text, firstBlank.surname.Text, dateTime, 
                 firstBlank.numOfPass.Text, genderType, Convert.ToDouble(firstBlank.sum.Text), 
-                catOfDeposit, termOfDep, "weq");
+                catOfDeposit, termOfDep, passwordField.Password);
 
             mainwin.Clients.Add(temp_client);
             try
@@ -112,7 +117,5 @@ namespace CourseM
         {
             blank.Close();
         }
-
-        
     }
 }

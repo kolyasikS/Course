@@ -27,8 +27,8 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="92" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="92"/>
+            <ColumnDefinition Width="155"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -37,8 +37,10 @@
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
+        <Label Grid.Column="0" Grid.Row="0" Content="Password:" Margin="0,5,5,3"/>
+        <PasswordBox x:Name="passwordField" Margin="5,5,0,5" Grid.Column="1"/>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,208,0,-208" Width="154">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,210,0,-210" Width="154" Grid.Column="1">
             <Button x:Name="nextPage" Click = "OpenLastPage" Content="" Width="71" RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
                     <TransformGroup>

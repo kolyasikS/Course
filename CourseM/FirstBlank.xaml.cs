@@ -24,10 +24,8 @@ namespace CourseM
     {
         MainWindow mainwin;
         Blank blank;
-        private FileIO _fileIO;
-        private readonly string PATH;
         DateTime dateTime;
-        private string genderType;
+        public string genderType;
 
         public FirstBlank(MainWindow mainwin, Blank blank, string path)
         {
@@ -35,9 +33,6 @@ namespace CourseM
 
             this.mainwin = mainwin;
             this.blank = blank;
-
-            PATH = path;
-
             dateTime = DateTime.Now;
             datePicker.SelectedDate = dateTime;
 
@@ -47,14 +42,6 @@ namespace CourseM
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
         }
-
-        public void Create_Client()
-        {
-
-            
-
-        }
-
         private void datePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             dateTime = (DateTime)datePicker.SelectedDate;
