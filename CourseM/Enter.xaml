@@ -43,8 +43,9 @@
         <Label x:Name="password2" Grid.Column="0" Grid.Row="3" Visibility="Hidden" Foreground="#FF26323D" Content="Enter password again:" Margin="0,0,1,0"/>
         <PasswordBox x:Name="passwordAttempt2" Visibility="Hidden" Background="#FFFAC2FF" Grid.Column="1" Grid.Row="3" Height="20" Margin="0,4,10,6"/>
 
-        <Button x:Name="EnterButton" Visibility="Hidden" Grid.Column="1" Grid.Row="4" Width="80" Click="EnterAdministrator" Margin="58,4,17,4">Enter</Button>
-        <Button x:Name="Quit"  Grid.Column="0" Grid.Row="4" Width="80" Click="QuitBank" Margin="10,4,45,4">Quit</Button>
+        <Button x:Name="EnterButton" Visibility="Hidden" Grid.Column="1" Grid.Row="4" Width="Auto" Click="EnterAdministrator" Margin="72,4,10,4">Enter</Button>
+        <Button x:Name="CancelButton" Visibility="Hidden" Grid.Row="4" Width="Auto" Click="Cancel" Margin="128,4,98,4" Grid.ColumnSpan="2">Cancel</Button>
+        <Button x:Name="Quit"  Grid.Column="0" Grid.Row="4" Width="Auto" Click="QuitBank" Margin="9,4,51,4">Quit Bank</Button>
 
 
     </Grid>

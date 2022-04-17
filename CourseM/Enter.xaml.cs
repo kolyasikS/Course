@@ -19,13 +19,15 @@ namespace CourseM
     /// </summary>
     public partial class Enter : Window
     {
-        public int isAdmin = -1;
+        public int isAdmin;
         private string passwordOfAdmin;
-        public Enter(MainWindow mainWindow)
+        public Enter(MainWindow mainWindow, int IsAdmin = -1)
         {
             InitializeComponent();
 
+            this.isAdmin = IsAdmin;
             this.Owner = mainWindow;
+
             passwordOfAdmin = "Course2022";
         }
 
@@ -59,7 +61,6 @@ namespace CourseM
 
         private void QuitBank(object sender, RoutedEventArgs e)
         {
-
             this.Owner.Close();
         }
 
@@ -74,6 +75,11 @@ namespace CourseM
         private void EnterClient(object sender, RoutedEventArgs e)
         {
             isAdmin = 0;
+            Close();
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }
