@@ -11,6 +11,7 @@
     <None Remove="Resources\icon.jpg" />
     <None Remove="Resources\icon2.jpg" />
     <None Remove="Resources\info.jpg" />
+    <None Remove="Resources\next.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
     <Resource Include="Resources\icon.jpg" />
     <Resource Include="Resources\icon2.jpg" />
     <Resource Include="Resources\info.jpg" />
+    <Resource Include="Resources\next.png" />
   </ItemGroup>
 
 </Project>

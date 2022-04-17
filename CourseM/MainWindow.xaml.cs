@@ -78,6 +78,15 @@ namespace CourseM
                 return;
             }
 
+            PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).Password);
+            passwordClient.ShowDialog();
+           
+            if (!passwordClient.isChecked)
+            {
+                return;
+            }
+            
+
             Client temp = new Client((Client)list.SelectedItem);
 
             string tempTermDeposit;

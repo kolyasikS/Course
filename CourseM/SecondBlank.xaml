@@ -1,0 +1,66 @@
+﻿<Page x:Class="CourseM.SecondBlank"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CourseM"
+      mc:Ignorable="d" 
+      Title="Blank"
+      FocusManager.FocusedElement="{Binding ElementName=leftMarginTextBox}" Height="330" Width="260" Loaded="Page_Loaded">
+    <Grid Background="White">
+        <Grid.Resources>
+            <!-- Default settings for controls -->
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Margin" Value="0,3,5,5" />
+                <Setter Property="Padding" Value="0,0,0,5" />
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="0,0,0,5" />
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="Height" Value="20"/>
+            </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="70" />
+                <Setter Property="Height" Value="25" />
+                <Setter Property="Margin" Value="5,0,0,0" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="92"/>
+            <ColumnDefinition Width="155"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Content="Password:" Margin="0,5,5,3"/>
+        <PasswordBox x:Name="passwordField" Margin="5,5,0,5" Grid.Column="1"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,210,0,-210" Width="154" Grid.Column="1">
+            <Button x:Name="nextPage" Click = "OpenLastPage" Content="" Width="71" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-180.018"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Image Height="30" Width="70" Source="Resources\next.png" Margin="0,-2,1,-3"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="okButton" Click = "CreateClient"  Content="Register"/>
+        </StackPanel>
+
+
+    </Grid>
+</Page>

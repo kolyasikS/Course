@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseM" d:DataContext="{d:DesignInstance Type=local:App}"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Icon="Resources\icon2.jpg"
         Title="Bank" Height="470" Width="726" ResizeMode="CanMinimize" FontSize="14">
 
