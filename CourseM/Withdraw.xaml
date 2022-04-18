@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CourseM" d:DataContext="{d:DesignInstance Type=local:App}"
         mc:Ignorable="d"
         Icon="Resources\icon2.jpg"
-        Title="Withdraw" Height="137" Width="290">
+        Title="Operation" Height="137" ResizeMode="NoResize" Width="290">
     <Grid>
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
@@ -30,7 +30,7 @@
         <Label Grid.Column="0" Grid.Row="0" Content="Money you have:"/>
         <Label Grid.Column="1" Grid.Row="0" x:Name="havingMoney"/>
 
-        <Label Grid.Column="0" Grid.Row="1" Content="Sum of withdrawing:" Margin="0,1,156,2" Grid.ColumnSpan="2"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="Sum for operation:" Margin="0,1,156,2" Grid.ColumnSpan="2"/>
         <TextBox x:Name="sumWithdraw" Grid.Column="1" Grid.Row="1" Margin="0,5,10,5"/>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal" Margin="72,30,0,-37" Width="201" Grid.ColumnSpan="2">

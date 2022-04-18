@@ -27,6 +27,7 @@ namespace CourseM
             get { return clients; }
             set { clients = value; }
         }
+        private bool isAdmin;
 
         private readonly string PATH = $"{Environment.CurrentDirectory}\\Bank.json";
         private FileIO _fileIO;
@@ -39,12 +40,21 @@ namespace CourseM
 
             InitializeComponent();
 
+            SetPositionInScreen();
             Clients ??= new BindingList<Client>();
         }
         private void Add_Client(object sender, RoutedEventArgs e)
         {
             Blank blank = new Blank(this, PATH);
             blank.ShowDialog();
+        }
+
+        private void SetPositionInScreen()
+        {
+            double screenHeight = SystemParameters.FullPrimaryScreenHeight;
+            double screenWidth = SystemParameters.FullPrimaryScreenWidth;
+            this.Top = (screenHeight - this.Height) / 2;
+            this.Left = (screenWidth - this.Width) / 2;
         }
 
         void UpdateDemandDeposit(Client _client, float interestRate)
@@ -78,14 +88,16 @@ namespace CourseM
                 return;
             }
 
-            PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).Password);
-            passwordClient.ShowDialog();
-           
-            if (!passwordClient.isChecked)
+            if (!isAdmin)
             {
-                return;
+                PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).Password);
+                passwordClient.ShowDialog();
+
+                if (!passwordClient.isChecked)
+                {
+                    return;
+                }
             }
-            
 
             Client temp = new Client((Client)list.SelectedItem);
 
@@ -114,9 +126,9 @@ namespace CourseM
 
         private void Delete_Client(object sender, RoutedEventArgs e)
         {
-            if (list.SelectedItem == null)
+            if (list.SelectedItem == null || ((Client)list.SelectedItem).NumOfAccount != numberOfAccount)
             {
-                MessageBox.Show("You didn`t choose an account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("You didn`t log in an account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (MessageBox.Show("Do you want to delete this account?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
@@ -148,9 +160,11 @@ namespace CourseM
             passport.Text = "";
             accountData.Text = "";
             lastOperation.Content = "Last operation was carried out at\n";
-        }
+            numberOfAccount = 0;
 
-        private void SavaLoadFile(string choice)
+    }
+
+    private void SavaLoadFile(string choice)
         {
             if (choice == "load")
             {
@@ -226,6 +240,45 @@ namespace CourseM
                 + "After " + tempTermDeposit + " you give: " + sumAfterTerm;
             lastOperation.Content = "Last operation was carried out at\n";
             lastOperation.Content += temp.LastOperation.ToString();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Enter enter = new Enter(this);
+            enter.ShowDialog();
+            if (enter.isAdmin == 1)
+            {
+                isAdmin = true;
+                IsUser.Content = "You entered as an Administrator";
+            }
+            else if (enter.isAdmin == 0)
+            {
+                isAdmin = false;
+                IsUser.Content = "You entered as a Client";
+            }
+        }
+
+        private void ChangeUser(object sender, RoutedEventArgs e)
+        {
+            int isAdminToEnter = Convert.ToInt32(isAdmin);
+
+            Enter enter = new Enter(this, isAdminToEnter);
+            enter.CancelButton.Visibility = Visibility.Visible;
+            enter.ShowDialog();
+            if (enter.isAdmin == 1)
+            {
+                isAdmin = true;
+                registerButton.IsEnabled = false;
+                withdraw_deposit.IsEnabled = false;
+                IsUser.Content = "You entered as an Administrator";
+            }
+            else if (enter.isAdmin == 0)
+            {
+                isAdmin = false;
+                registerButton.IsEnabled = true;
+                withdraw_deposit.IsEnabled = true;
+                IsUser.Content = "You entered as a Client";
+            }
         }
     }
     
