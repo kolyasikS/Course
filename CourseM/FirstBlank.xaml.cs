@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace CourseM
 {
-    /// <summary>
-    /// Interaction logic for FirstBlank.xaml
-    /// </summary>
     public partial class FirstBlank : Page
     {
         MainWindow mainwin;
