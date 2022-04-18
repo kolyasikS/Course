@@ -214,18 +214,20 @@ namespace CourseM
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            /*Enter enter = new Enter(this);
+            Enter enter = new Enter(this);
             enter.ShowDialog();
             if (enter.isAdmin == 1)
             {
                 isAdmin = true;
+                registerButton.IsEnabled = false;
+                withdraw_deposit.IsEnabled = false;
                 IsUser.Content = "You entered as an Administrator";
             }
             else if (enter.isAdmin == 0)
             {
                 isAdmin = false;
                 IsUser.Content = "You entered as a Client";
-            }*/
+            }
             isAdmin = true;
         }
         private void ChangeUser(object sender, RoutedEventArgs e)
