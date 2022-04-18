@@ -69,11 +69,11 @@
         <TextBox x:Name="sum" Grid.Column="1" Grid.Row="5" Margin="0,7,13,8"/>
 
         <Label Grid.Column="0" Grid.Row="6" Content="Currency:" Margin="0,5,5,5"/>
-        <ComboBox x:Name="currency" IsEnabled="True" Grid.Column="1" Grid.Row="6" Height="23" Margin="0,4,0,4" SelectionChanged="Currency_SelectionChanged" BorderBrush="#00000000">
-            <TextBlock>US dollar (USD) - $</TextBlock>
+        <ComboBox x:Name="currency" IsEnabled="True" Grid.Column="1" Grid.Row="6" Height="23" Margin="0,4,0,4" BorderBrush="#00000000">
+            <TextBlock>Pound sterling (GBP) - £</TextBlock> 
             <TextBlock>Euro	(EUR) - €</TextBlock>
+            <TextBlock>US dollar (USD) - $</TextBlock>
             <TextBlock>Japanese yen	(JPY) - ¥</TextBlock>
-            <TextBlock>Pound sterling (GBP) - £</TextBlock>
             <TextBlock>S Korean won (KRW) - ₩</TextBlock>
         </ComboBox>
 

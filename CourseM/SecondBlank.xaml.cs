@@ -39,37 +39,47 @@ namespace CourseM
 
             dateTime = DateTime.Now;
         }
-        private void CreateClient(object sender, RoutedEventArgs e)
+        private bool CheckData(string genderType, ref int temp_int, ref double temp_double)
         {
-            string genderType = firstBlank.genderType;
-
-            if (firstBlank.name.Text == "" || firstBlank.surname.Text == "" || firstBlank.numOfPass.Text == "" 
+            if (firstBlank.name.Text == "" || firstBlank.surname.Text == "" || firstBlank.numOfPass.Text == ""
                 || genderType == "" || firstBlank.sum.Text == ""
-                || categoryOfDeposit.SelectedItem == null || (termDeposit.SelectedItem == null 
+                || categoryOfDeposit.SelectedItem == null || firstBlank.currency.SelectedItem == null || (termDeposit.SelectedItem == null
                 && ((TextBlock)categoryOfDeposit.SelectedItem).Text == "Term deposit"))
             {
                 MessageBox.Show("You didn`t fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                return false;
             }
+
             if (passwordField.Password.Length < 6)
             {
                 MessageBox.Show("Password must contain >5 symbols!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                return false;
             }
 
-            int temp_int;
             if (!int.TryParse(firstBlank.numOfPass.Text, out temp_int)
                 || firstBlank.numOfPass.Text.Length != 9)
             {
                 MessageBox.Show("Passport No has to be none-digit number!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                return false;
             }
-            double temp_double;
-            if (!double.TryParse(firstBlank.sum.Text, out temp_double) 
-                || firstBlank.sum.Text.Length < 5 
+
+            if (!double.TryParse(firstBlank.sum.Text, out temp_double)
+                || firstBlank.sum.Text.Length < 5
                 || firstBlank.sum.Text.Length > 9)
             {
                 MessageBox.Show("We cannot accept that sum. Reread the conditions of our bank again!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+        private void CreateClient(object sender, RoutedEventArgs e)
+        {
+            string genderType = firstBlank.genderType;
+            int temp_int = 0;
+            double temp_double = 0;
+            if (!CheckData(genderType, ref temp_int, ref temp_double))
+            {
                 return;
             }
 
@@ -84,9 +94,35 @@ namespace CourseM
                 termOfDep = ((TextBlock)termDeposit.SelectedItem).Text;
             }
 
+            string currency;
+            switch (((TextBlock)firstBlank.currency.SelectedItem).Text[0])
+            {
+                case 'P':
+                    currency = "£";
+                    break;
+                case 'E':
+                    currency = "€";
+                    break;
+                case 'U':
+                    currency = "$";
+                    break;
+                case 'J':
+                    currency = "¥";
+                    break;
+                case 'S':
+                    currency = "₩";
+                    break;
+                default:
+                    return;
+            }
+
+            int amountOfM = 0;
+            float rateInt = SetInterestR(termOfDep, currency, ref amountOfM);
+        
+
             Client temp_client = new Client(firstBlank.name.Text, firstBlank.surname.Text, dateTime, 
                 firstBlank.numOfPass.Text, genderType, Convert.ToDouble(firstBlank.sum.Text), 
-                catOfDeposit, termOfDep, passwordField.Password);
+                catOfDeposit, termOfDep, passwordField.Password, currency, rateInt, amountOfM);
 
             mainwin.Clients.Add(temp_client);
             try
@@ -100,6 +136,77 @@ namespace CourseM
             }
             blank.Close();
 
+        }
+       
+        private float SetInterestR(string termOfDep, string currency, ref int amountOfM)
+        {
+            float[,] tableOfInterestsRate = new float[5, 6]
+            {
+                {0.01f, 0.015f, 0.02f, 0.025f, 0.037f, 0.030f},
+                {0.02f, 0.026f, 0.032f, 0.40f, 0.042f, 0.046f},
+                {0.025f, 0.032f, 0.039f, 0.044f, 0.046f, 0.053f},
+                {0.03f, 0.038f, 0.046f, 0.052f, 0.054f, 0.062f},
+                {0.035f, 0.045f, 0.055f, 0.063f, 0.065f, 0.075f}
+            };
+            float interestRate;
+            int rowInTable;
+            int ColumnInTable;
+
+            switch (currency[0])
+            {
+                case '£':
+                    rowInTable = 0;
+                    break;
+                case '€':
+                    rowInTable = 1;
+                    break;
+                case '$':
+                    rowInTable = 2;
+                    break;
+                case '¥':
+                    rowInTable = 3;
+                    break;
+                case '₩':
+                    rowInTable = 4;
+                    break;
+                default:
+                    rowInTable = -1;
+                    break;
+            }
+            if (termOfDep == "1 month")
+            {
+                ColumnInTable = 0;
+                amountOfM = 1;
+            }
+            else if (termOfDep == "3 months")
+            {
+                ColumnInTable = 1;
+                amountOfM = 3;
+            }
+            else if (termOfDep == "6 months")
+            {
+                ColumnInTable = 2;
+                amountOfM = 6;
+            }
+            else if (termOfDep == "No term")
+            {
+                ColumnInTable = 3;
+                amountOfM = 12;
+            }
+            else if (termOfDep == "1 year")
+            {
+                ColumnInTable = 4;
+                amountOfM = 12;
+            }
+            else
+            {
+                ColumnInTable = 5;
+                amountOfM = 36;
+            }
+
+            interestRate = tableOfInterestsRate[rowInTable,ColumnInTable];
+
+            return interestRate;
         }
         private void OpenLastPage(object sender, RoutedEventArgs e)
         {

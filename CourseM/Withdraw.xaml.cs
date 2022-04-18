@@ -26,7 +26,7 @@ namespace CourseM
         {
             InitializeComponent();
  
-            havingMoney.Content = Math.Round(client.Sum, 2) + "$";
+            havingMoney.Content = Math.Round(client.sum, 2) + "$";
             this.client = client;
             this.mainwin = mainwin;
 
@@ -39,13 +39,13 @@ namespace CourseM
         private void ToWithdraw(object sender, RoutedEventArgs e)
         {
             double temp_double;
-            if (!double.TryParse(sumWithdraw.Text, out temp_double) || temp_double > client.Sum)
+            if (!double.TryParse(sumWithdraw.Text, out temp_double) || temp_double > client.sum)
             {
                 MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            ((Client)mainwin.list.SelectedItem).Sum = client.Sum -= temp_double;
-            ((Client)mainwin.list.SelectedItem).LastOperation = DateTime.Now;
+            ((Client)mainwin.list.SelectedItem).sum = client.sum -= temp_double;
+            ((Client)mainwin.list.SelectedItem).lastOperation = DateTime.Now;
             try
             {
                 _fileIO.SaveData(mainwin.Clients);
@@ -56,7 +56,7 @@ namespace CourseM
                 Close();
             }
 
-            havingMoney.Content = Math.Round(client.Sum, 2) + "$";
+            havingMoney.Content = Math.Round(client.sum, 2) + "$";
             SetClientInfo(client);
 
             return;
@@ -71,13 +71,13 @@ namespace CourseM
         private void ToDeposit(object sender, RoutedEventArgs e)
         {
             double temp_double;
-            if (!double.TryParse(sumWithdraw.Text, out temp_double) || temp_double > double.MaxValue - client.Sum)
+            if (!double.TryParse(sumWithdraw.Text, out temp_double) || temp_double > double.MaxValue - client.sum)
             {
                 MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            ((Client)mainwin.list.SelectedItem).Sum = client.Sum += temp_double;
-            ((Client)mainwin.list.SelectedItem).LastOperation = DateTime.Now;
+            ((Client)mainwin.list.SelectedItem).sum = client.sum += temp_double;
+            ((Client)mainwin.list.SelectedItem).lastOperation = DateTime.Now;
             try
             {
                 _fileIO.SaveData(mainwin.Clients);
@@ -88,7 +88,7 @@ namespace CourseM
                 Close();
             }
 
-            havingMoney.Content = Math.Round(client.Sum, 2) + "$";
+            havingMoney.Content = Math.Round(client.sum, 2) + "$";
             SetClientInfo(client);
 
             return;
@@ -96,22 +96,20 @@ namespace CourseM
         void SetClientInfo(Client temp)
         {
             string tempTermDeposit;
-            if (temp.TermOfDeposit == "No term")
+            if (temp.termOfDeposit == "No term")
             {
                 tempTermDeposit = "1 year";
             }
             else
             {
-                tempTermDeposit = temp.TermOfDeposit;
+                tempTermDeposit = temp.termOfDeposit;
             }
 
-            float interestRate = mainwin.SetInterestR(temp);
-
-            double sumAfterTerm = Math.Round(temp.Sum + temp.Sum * (interestRate / 100f), 2);
-            temp.Sum = Math.Round(temp.Sum, 2);
+            double sumAfterTerm = Math.Round(temp.sum + temp.sum * (temp.interestRate), 2);
+            temp.sum = Math.Round(temp.sum, 2);
             sumWithdraw.Text = "";
 
-            mainwin.ShowDataClient(temp, interestRate, tempTermDeposit, sumAfterTerm);
+            mainwin.ShowDataClient(temp, tempTermDeposit, sumAfterTerm);
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {

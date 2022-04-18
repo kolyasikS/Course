@@ -47,15 +47,11 @@ namespace CourseM
             dateTime = (DateTime)datePicker.SelectedDate;
             dateLabel.Content = dateTime.ToString("d", CultureInfo.GetCultureInfo("de-De"));
         }
-
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radiobut = (RadioButton)sender;
             genderType = radiobut.Content.ToString();
         }
-
-       
-
         private void SetButtonToolTip(Button butInfo)
         {
             ToolTip toolTip = new ToolTip();
@@ -88,7 +84,6 @@ namespace CourseM
 
             butInfo.ToolTip = toolTip;
         }
-
         private void OpenNextPage(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(blank.secondBlank);

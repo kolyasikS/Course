@@ -48,7 +48,6 @@ namespace CourseM
             Blank blank = new Blank(this, PATH);
             blank.ShowDialog();
         }
-
         public void SetPositionInScreen(Window win)
         {
             double screenHeight = SystemParameters.FullPrimaryScreenHeight;
@@ -56,25 +55,22 @@ namespace CourseM
             win.Top = (screenHeight - win.Height) / 2;
             win.Left = (screenWidth - win.Width) / 2;
         }
-
-        private void UpdateDemandDeposit(Client _client, float interestRate)
+        private void UpdateDemandDeposit(Client _client)
         {
-            while (_client.DateOfDepositing.AddYears(_client.AmountOfYears) < DateTime.Now)
+            while (_client.dateOfDepositing.AddMonths(_client.amountOfMonth) < DateTime.Now)
             {
-                _client.Sum += _client.Sum * (interestRate / 100f);
-                _client.AmountOfYears++;
+                _client.sum += _client.sum * (_client.interestRate);
+                _client.amountOfMonth += 12;
             }
         }
-
-        private void UpdateTermDeposit(Client _client, int amountMonth, float interestRate)
+        private void UpdateTermDeposit(Client _client)
         {
-            if (_client.DateOfDepositing.AddMonths(amountMonth) < DateTime.Now && (!_client.IsEndedTerm))
+            if (_client.dateOfDepositing.AddMonths(_client.amountOfMonth) < DateTime.Now && (!_client.isEndedTerm))
             {
-                _client.Sum += _client.Sum * (interestRate / 100f);
-                _client.IsEndedTerm = true;
+                _client.sum += _client.sum * (_client.interestRate);
+                _client.isEndedTerm = true;
             }
         }
-     
         private void Log_in(object sender, RoutedEventArgs e)
         {
             if (list.SelectedItem == null)
@@ -93,7 +89,7 @@ namespace CourseM
 
                 Screen SetPositionInScreenDEL = new Screen(SetPositionInScreen);
 
-                PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).Password, SetPositionInScreenDEL);
+                PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).password, SetPositionInScreenDEL);
                 passwordClient.ShowDialog();
 
                 if (!passwordClient.isChecked)
@@ -105,31 +101,36 @@ namespace CourseM
             Client temp = new Client((Client)list.SelectedItem);
 
             string tempTermDeposit;
-            if (temp.TermOfDeposit == "No term")
+            if (temp.termOfDeposit == "No term")
             {
                 tempTermDeposit = "1 year";
-                UpdateDemandDeposit((Client)list.SelectedItem, 1.0f);
+                UpdateDemandDeposit((Client)list.SelectedItem);
+
+                temp.isEndedTerm = ((Client)list.SelectedItem).isEndedTerm;
+                temp.amountOfMonth = ((Client)list.SelectedItem).amountOfMonth;
+                SavaLoadFile("save");
             }
             else
             {
-                tempTermDeposit = temp.TermOfDeposit;
+                tempTermDeposit = temp.termOfDeposit;
+                UpdateTermDeposit((Client)list.SelectedItem);
+
+                temp.isEndedTerm = ((Client)list.SelectedItem).isEndedTerm;
+                SavaLoadFile("save");
             }
 
-            float interestRate = SetInterestR(temp);
-            
-            SavaLoadFile("save");
-            
-            numberOfAccount = temp.NumOfAccount;
-            temp.Sum = ((Client)list.SelectedItem).Sum;
-            double sumAfterTerm = Math.Round(temp.Sum + temp.Sum * (interestRate / 100f), 2);
-            temp.Sum = Math.Round(temp.Sum, 2);
 
-            ShowDataClient(temp, interestRate, tempTermDeposit, sumAfterTerm);
+            
+            numberOfAccount = temp.numOfAccount;
+            temp.sum = Math.Round(((Client)list.SelectedItem).sum, 2);
+
+            double sumAfterTerm = Math.Round(temp.sum + temp.sum * (temp.interestRate), 2);
+
+            ShowDataClient(temp, tempTermDeposit, sumAfterTerm);
         }
-
         private void Delete_Client(object sender, RoutedEventArgs e)
         {
-            if (list.SelectedItem == null || ((Client)list.SelectedItem).NumOfAccount != numberOfAccount)
+            if (list.SelectedItem == null || ((Client)list.SelectedItem).numOfAccount != numberOfAccount)
             {
                 MessageBox.Show("You didn`t log in an account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -145,10 +146,9 @@ namespace CourseM
             }
             
         }
-
         private void Withdraw(object sender, RoutedEventArgs e)
         {
-            if (list.SelectedItem == null || ((Client)list.SelectedItem).NumOfAccount != numberOfAccount)
+            if (list.SelectedItem == null || ((Client)list.SelectedItem).numOfAccount != numberOfAccount)
             {
                 MessageBox.Show("Log in to withdraw money!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -157,7 +157,6 @@ namespace CourseM
             withdraw.ShowDialog();
 
         }
-
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             passport.Text = "";
@@ -166,7 +165,6 @@ namespace CourseM
             numberOfAccount = 0;
 
     }
-
         private void SavaLoadFile(string choice)
         {
             if (choice == "load")
@@ -195,59 +193,32 @@ namespace CourseM
                 }
             }
         }
-        
-        public float SetInterestR(Client temp)
+        public void ShowDataClient(Client temp, string tempTermDeposit, double sumAfterTerm)
         {
-            float interestRate;
-
-            if (temp.TermOfDeposit == "1 month")
+            string String_SumAfterTerm = "";
+            if (!temp.isEndedTerm)
             {
-                interestRate = 0.4f;
-                UpdateTermDeposit((Client)list.SelectedItem, 1, interestRate);
-            }
-            else if (temp.TermOfDeposit == "3 months")
-            {
-                interestRate = 0.6f;
-                UpdateTermDeposit((Client)list.SelectedItem, 3, interestRate);
-            }
-            else if (temp.TermOfDeposit == "6 months")
-            {
-                interestRate = 0.8f;
-                UpdateTermDeposit((Client)list.SelectedItem, 6, interestRate);
-            }
-            else if (temp.TermOfDeposit == "1 year" || temp.TermOfDeposit == "No term")
-            {
-                interestRate = 1.0f;
-                UpdateTermDeposit((Client)list.SelectedItem, 12, interestRate);
+                String_SumAfterTerm = "After " + ((temp.dateOfDepositing.AddDays(temp.amountOfMonth * 30) - DateTime.Now).Days).ToString() + " days you give: " + sumAfterTerm;
             }
             else
             {
-                interestRate = 1.2f;
-                UpdateTermDeposit((Client)list.SelectedItem, 36, interestRate);
-
+                String_SumAfterTerm = "Expired. You can withdraw your money.";
             }
-
-            return interestRate;
-        }
-
-        public void ShowDataClient(Client temp, float interestRate, string tempTermDeposit, double sumAfterTerm)
-        {
-            passport.Text = "Full name: " + temp.NameClient + " " + temp.Surname + ".\n"
-               + "Date of birthday: " + temp.BirthDate.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".\n"
-               + "Gender: " + temp.Gender + ".\n"
-               + "Number of passport: " + temp.PassportNo + ".";
-            accountData.Text = "Number of account: " + temp.NumOfAccount + ".\n"
-                + "Sum of Deposit: " + temp.Sum + "$\n\n"
-                + "Category of deposit: " + temp.CategoryOfDeposit + ". " + temp.TermOfDeposit + ".\n"
-                + "Date of depositing: " + temp.DateOfDepositing.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".  Interest rate: " + interestRate + "%\n"
-                + "After " + tempTermDeposit + " you give: " + sumAfterTerm;
+            passport.Text = "Full name: " + temp.nameClient + " " + temp.surname + ".\n"
+               + "Date of birthday: " + temp.birthDate.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".\n"
+               + "Gender: " + temp.gender + ".\n"
+               + "Number of passport: " + temp.passportNo + ".";
+            accountData.Text = "Number of account: " + temp.numOfAccount + ".\n"
+                + "Sum of Deposit: " + temp.sum + " " + temp.currency + "\n\n"
+                + "Category of deposit: " + temp.categoryOfDeposit + ". " + temp.termOfDeposit + ".\n"
+                + "Date of depositing: " + temp.dateOfDepositing.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".  Interest rate: " + temp.interestRate + "%\n"
+                + String_SumAfterTerm;
             lastOperation.Content = "Last operation was carried out at\n";
-            lastOperation.Content += temp.LastOperation.ToString();
+            lastOperation.Content += temp.lastOperation.ToString();
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Enter enter = new Enter(this);
+            /*Enter enter = new Enter(this);
             enter.ShowDialog();
             if (enter.isAdmin == 1)
             {
@@ -258,9 +229,9 @@ namespace CourseM
             {
                 isAdmin = false;
                 IsUser.Content = "You entered as a Client";
-            }
+            }*/
+            isAdmin = true;
         }
-
         private void ChangeUser(object sender, RoutedEventArgs e)
         {
             int isAdminToEnter = Convert.ToInt32(isAdmin);

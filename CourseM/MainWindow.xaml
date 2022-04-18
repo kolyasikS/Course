@@ -52,10 +52,10 @@
                 <Button Content="Change user..." Click="ChangeUser" Canvas.Left="628" Height="40" Width="156" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFA17DFF" Foreground="#FF840000" />
             </Canvas>
         </StackPanel>
-        <StackPanel Background="#FF525252" Margin="305,10,183,268">
+        <StackPanel Background="#FF525252" Margin="300,10,184,268">
             <Canvas>
                 <TextBlock Canvas.Left="103" Height="24" Width="142" FontSize="16" Canvas.Top="1" HorizontalAlignment="Center" VerticalAlignment="Center" >Bank account DATA</TextBlock>
-                <TextBlock x:Name="accountData" Canvas.Left="10" Canvas.Top="30" Width="328" Height="144"/>
+                <TextBlock x:Name="accountData" Canvas.Left="10" Canvas.Top="30" Width="336" Height="144" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
         </StackPanel>
         <Canvas Margin="371,366,0,0">
