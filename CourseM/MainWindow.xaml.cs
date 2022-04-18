@@ -28,11 +28,11 @@ namespace CourseM
             set { clients = value; }
         }
         private bool isAdmin;
-
         private readonly string PATH = $"{Environment.CurrentDirectory}\\Bank.json";
         private FileIO _fileIO;
         private uint numberOfAccount;
-        
+        public delegate void Screen(Window win);
+
         public MainWindow()
         {
             _fileIO = new FileIO(PATH);
@@ -40,7 +40,7 @@ namespace CourseM
 
             InitializeComponent();
 
-            SetPositionInScreen();
+            SetPositionInScreen(this);
             Clients ??= new BindingList<Client>();
         }
         private void Add_Client(object sender, RoutedEventArgs e)
@@ -49,15 +49,15 @@ namespace CourseM
             blank.ShowDialog();
         }
 
-        private void SetPositionInScreen()
+        public void SetPositionInScreen(Window win)
         {
             double screenHeight = SystemParameters.FullPrimaryScreenHeight;
             double screenWidth = SystemParameters.FullPrimaryScreenWidth;
-            this.Top = (screenHeight - this.Height) / 2;
-            this.Left = (screenWidth - this.Width) / 2;
+            win.Top = (screenHeight - win.Height) / 2;
+            win.Left = (screenWidth - win.Width) / 2;
         }
 
-        void UpdateDemandDeposit(Client _client, float interestRate)
+        private void UpdateDemandDeposit(Client _client, float interestRate)
         {
             while (_client.DateOfDepositing.AddYears(_client.AmountOfYears) < DateTime.Now)
             {
@@ -66,7 +66,7 @@ namespace CourseM
             }
         }
 
-        void UpdateTermDeposit(Client _client, int amountMonth, float interestRate)
+        private void UpdateTermDeposit(Client _client, int amountMonth, float interestRate)
         {
             if (_client.DateOfDepositing.AddMonths(amountMonth) < DateTime.Now && (!_client.IsEndedTerm))
             {
@@ -90,7 +90,10 @@ namespace CourseM
 
             if (!isAdmin)
             {
-                PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).Password);
+
+                Screen SetPositionInScreenDEL = new Screen(SetPositionInScreen);
+
+                PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).Password, SetPositionInScreenDEL);
                 passwordClient.ShowDialog();
 
                 if (!passwordClient.isChecked)
@@ -164,7 +167,7 @@ namespace CourseM
 
     }
 
-    private void SavaLoadFile(string choice)
+        private void SavaLoadFile(string choice)
         {
             if (choice == "load")
             {

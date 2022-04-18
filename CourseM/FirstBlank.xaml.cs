@@ -54,19 +54,7 @@ namespace CourseM
             genderType = radiobut.Content.ToString();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            TextBlock boxItem = (TextBlock)comboBox.SelectedItem;
-            if (boxItem.Text == "Demand deposit")
-            {
-                termDeposit.IsEnabled = false;
-            }
-            else
-            {
-                termDeposit.IsEnabled = true;
-            }
-        }
+       
 
         private void SetButtonToolTip(Button butInfo)
         {
@@ -109,5 +97,7 @@ namespace CourseM
         {
             blank.Close();
         }
+
+
     }
 }

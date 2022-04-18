@@ -45,8 +45,8 @@ namespace CourseM
 
             if (firstBlank.name.Text == "" || firstBlank.surname.Text == "" || firstBlank.numOfPass.Text == "" 
                 || genderType == "" || firstBlank.sum.Text == ""
-                || firstBlank.categoryOfDeposit.SelectedItem == null || (firstBlank.termDeposit.SelectedItem == null 
-                && ((TextBlock)firstBlank.categoryOfDeposit.SelectedItem).Text == "Term deposit"))
+                || categoryOfDeposit.SelectedItem == null || (termDeposit.SelectedItem == null 
+                && ((TextBlock)categoryOfDeposit.SelectedItem).Text == "Term deposit"))
             {
                 MessageBox.Show("You didn`t fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -73,7 +73,7 @@ namespace CourseM
                 return;
             }
 
-            string catOfDeposit = ((TextBlock)firstBlank.categoryOfDeposit.SelectedItem).Text;
+            string catOfDeposit = ((TextBlock)categoryOfDeposit.SelectedItem).Text;
             string termOfDep;
             if (catOfDeposit == "Demand deposit")
             {
@@ -81,7 +81,7 @@ namespace CourseM
             }
             else
             {
-                termOfDep = ((TextBlock)firstBlank.termDeposit.SelectedItem).Text;
+                termOfDep = ((TextBlock)termDeposit.SelectedItem).Text;
             }
 
             Client temp_client = new Client(firstBlank.name.Text, firstBlank.surname.Text, dateTime, 
@@ -106,16 +106,26 @@ namespace CourseM
             NavigationService.Navigate(blank.firstBlank);
 
         }
-        
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _fileIO = new FileIO(PATH);
         }
-
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             blank.Close();
+        }
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            TextBlock boxItem = (TextBlock)comboBox.SelectedItem;
+            if (boxItem.Text == "Demand deposit")
+            {
+                termDeposit.IsEnabled = false;
+            }
+            else
+            {
+                termDeposit.IsEnabled = true;
+            }
         }
     }
 }
