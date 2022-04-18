@@ -34,8 +34,8 @@
         <TextBox x:Name="sumWithdraw" Grid.Column="1" Grid.Row="1" Margin="0,5,10,5"/>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal" Margin="72,30,0,-37" Width="201" Grid.ColumnSpan="2">
-            <Button Content="Deposit" Click="ToDeposit"/>
-            <Button Content="Withdraw" Click="ToWithdraw"/>
+            <Button x:Name="depositButton" Content="Deposit" Click="ToDeposit"/>
+            <Button x:Name="withdrawButton" Content="Withdraw" Click="ToWithdraw"/>
             <Button Content="Cancel" Click="Cancel"/>
         </StackPanel>
     </Grid>

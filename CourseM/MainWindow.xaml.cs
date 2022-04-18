@@ -228,7 +228,6 @@ namespace CourseM
                 isAdmin = false;
                 IsUser.Content = "You entered as a Client";
             }
-            isAdmin = true;
         }
         private void ChangeUser(object sender, RoutedEventArgs e)
         {

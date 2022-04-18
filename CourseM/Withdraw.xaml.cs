@@ -25,10 +25,14 @@ namespace CourseM
         public Withdraw(MainWindow mainwin, Client client, string path)
         {
             InitializeComponent();
- 
+
             havingMoney.Content = Math.Round(client.sum, 2) + "$";
             this.client = client;
             this.mainwin = mainwin;
+
+            SetVisibleButtons(client);
+
+
 
             _fileIO = new FileIO(path);
 
@@ -36,6 +40,26 @@ namespace CourseM
 
         }
 
+        private void SetVisibleButtons(Client client)
+        {
+            if (client.categoryOfDeposit == "Demand deposit")
+            {
+                depositButton.IsEnabled = true;
+                withdrawButton.IsEnabled = true;
+            }
+            else
+            {
+                depositButton.IsEnabled = false;
+                if (!client.isEndedTerm)
+                {
+                    withdrawButton.IsEnabled = false;
+                }
+                else
+                {
+                    withdrawButton.IsEnabled = true;
+                }
+            }
+        }
         private void ToWithdraw(object sender, RoutedEventArgs e)
         {
             double temp_double;
