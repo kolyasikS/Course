@@ -32,15 +32,33 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Password:" Margin="0,5,5,3"/>
-        <PasswordBox x:Name="passwordField" Margin="5,5,0,5" Grid.Column="1"/>
+        <Label Grid.Column="0" Grid.Row="0" Content="Category of &#xD;&#xA;deposit:" Margin="0,0,1,0"/>
+        <ComboBox x:Name="categoryOfDeposit" Grid.Row="0" Grid.Column="1" IsEnabled="True" Height="23" Margin="4,6,9,6" SelectionChanged="ComboBox_SelectionChanged">
+            <TextBlock>Demand deposit</TextBlock>
+            <TextBlock>Term deposit</TextBlock>
+        </ComboBox>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,210,0,-210" Width="154" Grid.Column="1">
+        <Label Grid.Column="0" Grid.Row="1" Content="Term of deposit" Margin="0,5,5,5"/>
+        <ComboBox x:Name="termDeposit" IsEnabled="True" Grid.Column="1" Grid.Row="1" Height="23" Margin="4,3,9,3">
+            <TextBlock>1 month</TextBlock>
+            <TextBlock>3 months</TextBlock>
+            <TextBlock>6 months</TextBlock>
+            <TextBlock>1 year</TextBlock>
+            <TextBlock>3 years</TextBlock>
+        </ComboBox>
+        
+        
+        <Label Grid.Column="0" Grid.Row="2" Content="Password:" Margin="0,5,5,3"/>
+        <PasswordBox Grid.Column="1" Grid.Row="2" x:Name="passwordField" Margin="4,5,9,5" />
+
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,210,0,-210" Width="154">
             <Button x:Name="nextPage" Click = "OpenLastPage" Content="" Width="71" RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
                     <TransformGroup>

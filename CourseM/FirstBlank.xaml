@@ -37,10 +37,10 @@
             <RowDefinition Height="25" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="34" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="31" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
 
         </Grid.RowDefinitions>
 
@@ -65,22 +65,16 @@
             <RadioButton Content="Female"/>
         </StackPanel>
 
-        <Label Grid.Column="0" Grid.Row="5" Content="Sum of deposit:&#xD;&#xA;(in $) " Margin="0,4,5,4"/>
-        <TextBox x:Name="sum" Grid.Column="1" Grid.Row="5" Margin="0,12,13,13"/>
+        <Label Grid.Column="0" Grid.Row="5" Content="Sum of deposit:" Margin="0,7,5,8"/>
+        <TextBox x:Name="sum" Grid.Column="1" Grid.Row="5" Margin="0,7,13,8"/>
 
-        <Label Grid.Column="0" Grid.Row="6" Content="Category of &#xD;&#xA;deposit:" Margin="0,3,5,5"/>
-        <ComboBox x:Name="categoryOfDeposit" Grid.Column="1" IsEnabled="True" Grid.Row="6" Margin="0,11,13,12" SelectionChanged="ComboBox_SelectionChanged">
-            <TextBlock>Demand deposit</TextBlock>
-            <TextBlock>Term deposit</TextBlock>
-        </ComboBox>
-
-        <Label Grid.Column="0" Grid.Row="7" Content="Term of deposit" Margin="0,5,5,5"/>
-        <ComboBox x:Name="termDeposit" IsEnabled="True" Grid.Column="1" Grid.Row="7" Margin="0,4,13,4">
-            <TextBlock>1 month</TextBlock>
-            <TextBlock>3 months</TextBlock>
-            <TextBlock>6 months</TextBlock>
-            <TextBlock>1 year</TextBlock>
-            <TextBlock>3 years</TextBlock>
+        <Label Grid.Column="0" Grid.Row="6" Content="Currency:" Margin="0,5,5,5"/>
+        <ComboBox x:Name="currency" IsEnabled="True" Grid.Column="1" Grid.Row="6" Height="23" Margin="0,4,0,4" BorderBrush="#00000000">
+            <TextBlock>Pound sterling (GBP) - £</TextBlock> 
+            <TextBlock>Euro	(EUR) - €</TextBlock>
+            <TextBlock>US dollar (USD) - $</TextBlock>
+            <TextBlock>Japanese yen	(JPY) - ¥</TextBlock>
+            <TextBlock>S Korean won (KRW) - ₩</TextBlock>
         </ComboBox>
 
         <Button x:Name="buttonInfo" Grid.Column="0" Grid.Row="8" Height="35" Width="35" Margin="2,2,60,0" ToolTipService.ShowDuration = "70000">

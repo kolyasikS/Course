@@ -25,20 +25,12 @@ namespace CourseM
         {
             InitializeComponent();
 
-            SetPositionInScreen();
-
             firstBlank = new FirstBlank(mainwin, this, path);
             secondBlank = new SecondBlank(firstBlank, mainwin, this, path);
 
-            BlankPage.Content = firstBlank;
-        }
+            mainwin.SetPositionInScreen(this);
 
-        private void SetPositionInScreen()
-        {
-            double screenHeight = SystemParameters.FullPrimaryScreenHeight;
-            double screenWidth = SystemParameters.FullPrimaryScreenWidth;
-            this.Top = (screenHeight - this.Height) / 2;
-            this.Left = (screenWidth - this.Width) / 2;
+            BlankPage.Content = firstBlank;
         }
     }
 }

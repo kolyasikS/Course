@@ -21,12 +21,13 @@ namespace CourseM
     {
         private string password;
         public bool isChecked = false;
-        public PasswordClient1(string password)
+
+        public PasswordClient1(string password, MainWindow.Screen SetPositionInScreen)
         {
             InitializeComponent();
 
             this.password = password;
-            SetPositionInScreen();
+            SetPositionInScreen(this);
         }
 
         private void LogIn(object sender, RoutedEventArgs e)
@@ -44,14 +45,6 @@ namespace CourseM
 
             isChecked = true;
             Close();
-        }
-
-        private void SetPositionInScreen()
-        {
-            double screenHeight = SystemParameters.FullPrimaryScreenHeight;
-            double screenWidth = SystemParameters.FullPrimaryScreenWidth;
-            this.Top = (screenHeight - this.Height) / 2;
-            this.Left = (screenWidth - this.Width) / 2;
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {

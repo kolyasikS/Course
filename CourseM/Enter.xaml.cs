@@ -28,6 +28,7 @@ namespace CourseM
             this.isAdmin = IsAdmin;
             this.Owner = mainWindow;
 
+            mainWindow.SetPositionInScreen(this);
             passwordOfAdmin = "Course2022";
         }
 
