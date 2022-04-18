@@ -25,19 +25,19 @@ namespace CourseM
         public int amountOfMonth;
         public DateTime dateOfDepositing;
         public DateTime lastOperation;
-        public DateTime birthDate; 
-        
+        public DateTime birthDate;
 
-                else sum = value;
-                //OnPropertyChanged("Sum");
-            }
 
-        }
         public string Info
         {
             get { return info; }
             set { info = value; }
         }
+
+        public Client(string name, string sname, DateTime bDate, string passNo,
+            string gen, double s, string catOfDep, string termOfDep, string pass,
+            string curren, float rateInt, int amountOfM)
+        {
 
             nameClient = name;
             surname = sname;
@@ -47,23 +47,18 @@ namespace CourseM
             sum = s;
             categoryOfDeposit = catOfDep;
             termOfDeposit = termOfDep;
-            PassportNo = passNo;
-            Gender = gen;
-            Sum = s;
-            CategoryOfDeposit = catOfDep;
-            TermOfDeposit = termOfDep;
             dateOfDepositing = DateTime.Now;
             isEndedTerm = false;
+
+            Random random = new Random();
+            numOfAccount = (uint)random.Next(100000000, 1000000000);
+
+            lastOperation = DateTime.Now;
             info = nameClient + " " + surname;
             amountOfMonth = amountOfM;
             password = pass;
             currency = curren;
             interestRate = rateInt;
-
-            lastOperation = DateTime.Now;
-            Info = NameClient + " " + Surname;
-            amountOfYears = 1;
-            password = pass;
         }
 
         public Client(Client cl)
@@ -75,17 +70,17 @@ namespace CourseM
             passportNo = cl.passportNo;
             gender = cl.gender;
             sum = cl.sum;
+            categoryOfDeposit = cl.categoryOfDeposit;
+            termOfDeposit = cl.termOfDeposit;
+            numOfAccount = cl.numOfAccount;
+            info = cl.info;
+            dateOfDepositing = cl.dateOfDepositing;
             isEndedTerm = cl.isEndedTerm;
             amountOfMonth = cl.amountOfMonth;
             lastOperation = cl.lastOperation;
             password = cl.password;
             currency = cl.currency;
             interestRate = cl.interestRate;
-            dateOfDepositing = cl.dateOfDepositing;
-            IsEndedTerm = cl.IsEndedTerm;
-            AmountOfYears = cl.AmountOfYears;
-            lastOperation = cl.LastOperation;
-            password = cl.Password;
         }
 
         public Client()
@@ -93,14 +88,14 @@ namespace CourseM
 
         }
 
-       /* public event PropertyChangedEventHandler PropertyChanged;
+        /* public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string str = "NONE")
-        {
+         protected virtual void OnPropertyChanged(string str = "NONE")
+         {
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(str));
+             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(str));
 
-        }*/
+         }*/
 
     }
 }
