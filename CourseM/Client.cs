@@ -25,8 +25,8 @@ namespace CourseM
         public int amountOfMonth;
         public DateTime dateOfDepositing;
         public DateTime lastOperation;
-        public DateTime birthDate; 
-        
+        public DateTime birthDate;
+
 
         public string Info
         {
@@ -34,7 +34,7 @@ namespace CourseM
             set { info = value; }
         }
 
-        public Client(string name, string sname, DateTime bDate, string passNo, 
+        public Client(string name, string sname, DateTime bDate, string passNo,
             string gen, double s, string catOfDep, string termOfDep, string pass,
             string curren, float rateInt, int amountOfM)
         {
@@ -87,15 +87,5 @@ namespace CourseM
         {
 
         }
-
-       /* public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string str = "NONE")
-        {
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(str));
-
-        }*/
-
     }
 }

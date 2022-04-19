@@ -51,7 +51,7 @@ namespace CourseM
                 ((RadioButton)gender.Children[0]).Content = "Masculino";
                 ((RadioButton)gender.Children[1]).Content = "Masculina";
 
-                sumOfDepLabel.Content = "Suma de deposito:";
+                sumOfDepLabel.Content = "Suma de\ndeposito:";
                 currencyLabel.Content = "Divisa:";
                 ((TextBlock)currency.Items[0]).Text = "Libra esterlina (GBP) - £";
                 ((TextBlock)currency.Items[1]).Text = "Euro (EUR) - €";
@@ -59,15 +59,29 @@ namespace CourseM
                 ((TextBlock)currency.Items[3]).Text = "Yen japonés (JPY) - ¥";
                 ((TextBlock)currency.Items[4]).Text = "Won surcoreano (KRW) - ₩";
 
-
-
                 cancel.Content = "Cancelar";
             }
             else if (mainwin.language == MainWindow.ELanguage.french)
             {
+                nameLabel.Content = "Nom:";
+                surnameLabel.Content = "Nom de famille:";
+                birthDateLabel.Content = "Date de\nnaissance:";
+                datePicker.Language = System.Windows.Markup.XmlLanguage.GetLanguage("fr");
 
+                passportNoLabel.Content = "Numéro de\npasseport:";
+                genderLabel.Content = "Le sexe:";
+                ((RadioButton)gender.Children[0]).Content = "Mâle";
+                ((RadioButton)gender.Children[1]).Content = "Femelle";
 
+                sumOfDepLabel.Content = "Montant de\nl'acompte:";
+                currencyLabel.Content = "Monnaie:";
+                ((TextBlock)currency.Items[0]).Text = "Livre sterling (GBP) - £";
+                ((TextBlock)currency.Items[1]).Text = "Euro (EUR) - €";
+                ((TextBlock)currency.Items[2]).Text = "Dollar américain (USD) - $";
+                ((TextBlock)currency.Items[3]).Text = "Yen japonais (JPY) - ¥";
+                ((TextBlock)currency.Items[4]).Text = "Won sud-coréen (KRW) - ₩";
 
+                cancel.Content = "Annuler";
             }
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)

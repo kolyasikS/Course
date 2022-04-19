@@ -43,12 +43,12 @@ namespace CourseM
             }
             else if (language == MainWindow.ELanguage.french)
             {
-                this.Title = "";
-                enterPassLabel.Content = "";
-                enterPassAgLabel.Content = "";
+                this.Title = "Connexion";
+                enterPassLabel.Content = "Entrer le mot de passe:";
+                enterPassAgLabel.Content = "Saisir à nouveau\nle mot de passe:";
 
-                cancelButton.Content = "";
-                logInButton.Content = "";
+                cancelButton.Content = "Annuler";
+                logInButton.Content = "Connexion";
             }
         }
         private void LogIn(object sender, RoutedEventArgs e)

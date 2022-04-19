@@ -53,12 +53,12 @@
             <TextBlock>1 year</TextBlock>
             <TextBlock>3 years</TextBlock>
         </ComboBox>
-        
-        
+
+
         <Label x:Name="passwordLabel" Grid.Column="0" Grid.Row="2" Content="Password:" Margin="0,5,5,3"/>
         <PasswordBox Grid.Column="1" Grid.Row="2" x:Name="passwordField" Margin="4,5,9,5" />
 
-        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,210,0,-210" Width="154">
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,170,0,-170" Width="154">
             <Button x:Name="nextPage" Click = "OpenLastPage" Content="" Width="71" RenderTransformOrigin="0.5,0.5">
                 <Button.RenderTransform>
                     <TransformGroup>

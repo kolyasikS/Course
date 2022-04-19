@@ -254,7 +254,6 @@ namespace CourseM
                 IsUser.Content = "You entered as a Client";
             }
         }
-
         private void SetEnglishLanguage(object sender, RoutedEventArgs e)
         {
             // MainWindow 
@@ -273,7 +272,6 @@ namespace CourseM
 
             language = ELanguage.english;
         }
-
         private void SetSpanishLanguage(object sender, RoutedEventArgs e)
         {
             // MainWindow 
@@ -296,19 +294,20 @@ namespace CourseM
         private void SetFrenchLanguage(object sender, RoutedEventArgs e)
         {
             // MainWindow 
-            this.Title = "Bank";
+            this.Title = "Banque";
 
-            TitleAccountData.Text = "Bank account DATA";
-            TitlePassportData.Text = "Passport DATA";
-            lastOperation.Content = "Last operation was carried out at\n";
+            TitleAccountData.Text = "DONNÉES de compte bancaire";
+            TitlePassportData.Text = "DONNÉES de passeport";
+            lastOperation.Content = "La dernière transaction a eu lieu en\n";
 
-            login.Content = "Log in";
-            registerButton.Content = "Register";
-            DeleteButton.Content = "Delete";
-            changeUserButton.Content = "Change user...";
-            withdraw_deposit.Content = "Withdraw / Deposit";
+            login.Content = "Connexion";
+            registerButton.Content = "S'inscrire";
+            DeleteButton.Content = "Supprimer";
+            changeUserButton.Content = "Changer\nd'utilisateur...";
+            withdraw_deposit.Content = "Retirer / Verser";
             // MainWindow 
 
+            language = ELanguage.french;
         }
     }
     

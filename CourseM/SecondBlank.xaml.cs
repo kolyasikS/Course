@@ -62,17 +62,28 @@ namespace CourseM
             }
             else if (mainwin.language == MainWindow.ELanguage.french)
             {
-                
+                registerButton.Content = "S'inscrire";
+                passwordLabel.Content = "Mot de passe:";
+                termOfDepLabel.Content = "Durée du dépôt:";
+                catOfDepLabel.Content = "Catégorie\nde dépôt:";
 
-                
+                ((TextBlock)categoryOfDeposit.Items[0]).Text = "Dépôt de la demande";
+                ((TextBlock)categoryOfDeposit.Items[1]).Text = "Dépôt à terme";
+
+                ((TextBlock)termDeposit.Items[0]).Text = "1 mois";
+                ((TextBlock)termDeposit.Items[1]).Text = "3 mois";
+                ((TextBlock)termDeposit.Items[2]).Text = "6 mois";
+                ((TextBlock)termDeposit.Items[3]).Text = "1 an";
+                ((TextBlock)termDeposit.Items[4]).Text = "3 ans";
             }
         }
         private bool CheckData(string genderType, ref int temp_int, ref double temp_double)
         {
+            string catOfDepStr = ((TextBlock)categoryOfDeposit.SelectedItem).Text;
             if (firstBlank.name.Text == "" || firstBlank.surname.Text == "" || firstBlank.numOfPass.Text == ""
                 || genderType == "" || firstBlank.sum.Text == ""
                 || categoryOfDeposit.SelectedItem == null || firstBlank.currency.SelectedItem == null || (termDeposit.SelectedItem == null
-                && ((TextBlock)categoryOfDeposit.SelectedItem).Text == "Term deposit"))
+                && (catOfDepStr == "Term deposit" || catOfDepStr == "Dépôt à terme" || catOfDepStr == "Depósito a plazo")))
             {
                 MessageBox.Show("You didn`t fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
@@ -103,7 +114,9 @@ namespace CourseM
         }
         private void CreateClient(object sender, RoutedEventArgs e)
         {
-            string genderType = firstBlank.genderType;
+            string genderType = firstBlank.genderType == "Mâle" || firstBlank.genderType == "Masculino"
+                || firstBlank.genderType == "Male" ? "Male" : "Female";
+            
             int temp_int = 0;
             double temp_double = 0;
             if (!CheckData(genderType, ref temp_int, ref temp_double))
@@ -111,33 +124,83 @@ namespace CourseM
                 return;
             }
 
+
+
             string catOfDeposit = ((TextBlock)categoryOfDeposit.SelectedItem).Text;
             string termOfDep;
-            if (catOfDeposit == "Demand deposit")
+            if (catOfDeposit == "Demand deposit" || catOfDeposit == "Dépôt de la demande" || catOfDeposit == "Depósito a la vista")
             {
+                catOfDeposit = "Demand deposit";
                 termOfDep = "No term";
             }
             else
             {
-                termOfDep = ((TextBlock)termDeposit.SelectedItem).Text;
+                catOfDeposit = "Term deposit";
+                switch (termDeposit.SelectedIndex)
+                {
+                    case 0:
+                        termOfDep = "1 month";
+                        break;
+                    case 1:
+                        termOfDep = "3 months";
+                        break;
+                    case 2:
+                        termOfDep = "6 months";
+                        break;
+                    case 3:
+                        termOfDep = "1 year";
+                        break;
+                    case 4:
+                        termOfDep = "3 years";
+                        break;
+                    default:
+                        return;
+                }
+
             }
 
             string currency;
+
+
+            /*
+            <TextBlock>Pound sterling (GBP) - £</TextBlock>
+            <TextBlock>Euro	(EUR) - €</TextBlock>
+            <TextBlock>US dollar (USD) - $</TextBlock>
+            <TextBlock>Japanese yen	(JPY) - ¥</TextBlock>
+            <TextBlock>S Korean won (KRW) - ₩</TextBlock>
+
+            ((TextBlock)currency.Items[0]).Text = "Libra esterlina (GBP) - £";
+            ((TextBlock)currency.Items[1]).Text = "Euro (EUR) - €";
+            ((TextBlock)currency.Items[2]).Text = "Dólar estadounidense (USD) - $";
+            ((TextBlock)currency.Items[3]).Text = "Yen japonés (JPY) - ¥";
+            ((TextBlock)currency.Items[4]).Text = "Won surcoreano (KRW) - ₩";
+
+            ((TextBlock)currency.Items[0]).Text = "Livre sterling (GBP) - £";
+            ((TextBlock)currency.Items[1]).Text = "Euro (EUR) - €";
+            ((TextBlock)currency.Items[2]).Text = "Dollar américain (USD) - $";
+            ((TextBlock)currency.Items[3]).Text = "Yen japonais (JPY) - ¥";
+            ((TextBlock)currency.Items[4]).Text = "Won sud-coréen (KRW) - ₩";*/
+
+
             switch (((TextBlock)firstBlank.currency.SelectedItem).Text[0])
             {
                 case 'P':
+                case 'L':
                     currency = "£";
                     break;
                 case 'E':
                     currency = "€";
                     break;
                 case 'U':
+                case 'D':
                     currency = "$";
                     break;
                 case 'J':
+                case 'Y':
                     currency = "¥";
                     break;
                 case 'S':
+                case 'W':
                     currency = "₩";
                     break;
                 default:
@@ -260,6 +323,12 @@ namespace CourseM
             {
                 termDeposit.IsEnabled = true;
             }
+
         }
+
+        /*private void termDeposit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //MessageBox.Show(termDeposit.SelectedIndex.ToString());
+        }*/
     }
 }

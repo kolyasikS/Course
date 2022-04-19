@@ -60,7 +60,7 @@
                         <Image Source="Resources/spanish.png" Height="20" Width="30" />
                     </Button>
                 </ToolBar>
-                <Button x:Name="changeUserButton" Content="Change user..." Click="ChangeUser" Canvas.Left="626" Height="40" Width="156" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFA17DFF" Foreground="#FF840000" Canvas.Top="29" />
+                <Button x:Name="changeUserButton" Content="Change user..." Click="ChangeUser" Canvas.Left="626" Height="50" Width="156" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFA17DFF" Foreground="#FF840000" Canvas.Top="29" />
             </Canvas>
         </StackPanel>
         <StackPanel Background="#FF525252" Margin="300,10,184,268">

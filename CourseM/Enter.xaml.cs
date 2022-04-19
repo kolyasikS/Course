@@ -53,15 +53,23 @@ namespace CourseM
             }
             else if (language == MainWindow.ELanguage.french)
             {
-                this.Title = "";
+                this.Title = "Utilisateurs";
 
-                welcomeLabel.Content = "";
-                enterAdButton.Content = "";
-                enterClButton.Content = "";
+                welcomeLabel.Content = "Bienvenue \"Au club\", mon pote!\nPour participer, choisissez qui vous êtes.";
 
-                EnterButton.Content = "";
-                CancelButton.Content = "";
-                Quit.Content = "";
+                enterAsSP.Width = 340;
+                enterAdButton.Width = 175;
+                enterAdButton.Content = "Entrer en tant qu'Administrateur";
+                enterClButton.Content = "Entrer en tant que Client";
+
+                EnterButton.Content = "Entrer";
+                CancelButton.Content = "Annuler";
+                Quit.Content = "Quitter la banque";
+
+                password1.Content = "Entrer le mot de passe:";
+
+                password2.VerticalContentAlignment = VerticalAlignment.Top;
+                password2.Content = "Saisissez à nouveau le\nmot de passe:";
             }
         }
         private void EnterAdmin(object sender, RoutedEventArgs e)

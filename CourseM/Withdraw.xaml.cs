@@ -79,14 +79,14 @@ namespace CourseM
             }
             else if (mainwin.language == MainWindow.ELanguage.french)
             {
-                this.Title = "";
+                this.Title = "Opération";
 
-                moneyYouHave.Content = ":";
-                sumForOper.Content = ":";
+                moneyYouHave.Content = "L'argent que vous avez:";
+                sumForOper.Content = "Somme pour l'opération:";
 
-                depositButton.Content = "";
-                withdrawButton.Content = "";
-                cancelButton.Content = "";
+                depositButton.Content = "Verser";
+                withdrawButton.Content = "Retirer";
+                cancelButton.Content = "Annuler";
             }
         }
         private void ToWithdraw(object sender, RoutedEventArgs e)

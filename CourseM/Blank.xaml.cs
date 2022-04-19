@@ -44,7 +44,7 @@ namespace CourseM
             }
             else if (mainwin.language == MainWindow.ELanguage.french)
             {
-
+                this.Title = "Vierge";
             }
         }
     }
