@@ -38,6 +38,34 @@ namespace CourseM
             PATH = path;
 
             dateTime = DateTime.Now;
+            SetLanguage();
+        }
+        private void SetLanguage()
+        {
+            if (mainwin.language == MainWindow.ELanguage.spanish)
+            {
+                registerButton.Content = "Registro";
+                passwordLabel.Content = "Clave:";
+                termOfDepLabel.Content = "Plazo de depósito:";
+                catOfDepLabel.Content = "Categoría de\ndepósito:";
+
+                ((TextBlock)categoryOfDeposit.Items[0]).Text = "Depósito a la vista";
+                ((TextBlock)categoryOfDeposit.Items[1]).Text = "Depósito a plazo";
+
+                ((TextBlock)termDeposit.Items[0]).Text = "1 mes";
+                ((TextBlock)termDeposit.Items[1]).Text = "3 meses";
+                ((TextBlock)termDeposit.Items[2]).Text = "6 meses";
+                ((TextBlock)termDeposit.Items[3]).Text = "1 año";
+                ((TextBlock)termDeposit.Items[4]).Text = "3 años";
+
+
+            }
+            else if (mainwin.language == MainWindow.ELanguage.french)
+            {
+                
+
+                
+            }
         }
         private bool CheckData(string genderType, ref int temp_int, ref double temp_double)
         {
@@ -137,7 +165,6 @@ namespace CourseM
             blank.Close();
 
         }
-       
         private float SetInterestR(string termOfDep, string currency, ref int amountOfM)
         {
             float[,] tableOfInterestsRate = new float[5, 6]

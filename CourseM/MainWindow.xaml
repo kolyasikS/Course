@@ -47,20 +47,31 @@
         </Canvas>
         <StackPanel x:Name="stackPan" Background="#FF525252" Orientation="Horizontal" Margin="10,10,536,268">
             <Canvas>
-                <TextBlock Canvas.Left="92" Height="24" Width="106" FontSize="16">Passport DATA</TextBlock>
+                <TextBlock x:Name="TitlePassportData" Canvas.Left="26" Height="24" Width="222" FontSize="16" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Passport DATA</TextBlock>
                 <TextBlock x:Name="passport" Height="142" Width="273" FontSize="17" Canvas.Left="8" Canvas.Top="29"/>
-                <Button Content="Change user..." Click="ChangeUser" Canvas.Left="628" Height="40" Width="156" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFA17DFF" Foreground="#FF840000" />
+                <ToolBar x:Name="languages" Canvas.Left="636"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="146" Background="#FFFFC456" Foreground="Black" BorderBrush="Black">
+                    <Button x:Name="engish" Margin="0,0,5,0" Click="SetEnglishLanguage">
+                        <Image Source="Resources/english.png" Height="20" Width="30" />
+                    </Button>
+                    <Button x:Name="french" Margin="0,0,5,0" Click="SetFrenchLanguage">
+                        <Image Source="Resources/french.png" Height="20" Width="30" />
+                    </Button>
+                    <Button x:Name="spanish" Click="SetSpanishLanguage">
+                        <Image Source="Resources/spanish.png" Height="20" Width="30" />
+                    </Button>
+                </ToolBar>
+                <Button x:Name="changeUserButton" Content="Change user..." Click="ChangeUser" Canvas.Left="626" Height="40" Width="156" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFA17DFF" Foreground="#FF840000" Canvas.Top="29" />
             </Canvas>
         </StackPanel>
         <StackPanel Background="#FF525252" Margin="300,10,184,268">
             <Canvas>
-                <TextBlock Canvas.Left="103" Height="24" Width="142" FontSize="16" Canvas.Top="1" HorizontalAlignment="Center" VerticalAlignment="Center" >Bank account DATA</TextBlock>
+                <TextBlock x:Name="TitleAccountData" Canvas.Left="103" Height="24" Width="142" FontSize="16" Canvas.Top="1" HorizontalAlignment="Center" VerticalAlignment="Center" >Bank account DATA</TextBlock>
                 <TextBlock x:Name="accountData" Canvas.Left="10" Canvas.Top="30" Width="336" Height="144" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Canvas>
         </StackPanel>
         <Canvas Margin="371,366,0,0">
             <Label x:Name="IsUser" Canvas.Left="192" Canvas.Top="-37" HorizontalAlignment="Center" VerticalAlignment="Top" Width="244" Background="Transparent" FontSize="16" FontFamily="Yu Gothic UI" Foreground="#FF00FF0B" Height="36"></Label>
-            <Label x:Name="lastOperation"  Height="46" Width="228" Background="#FFA3D49E" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontSize="16" FontFamily="Times New Roman" Content="Last operation was carried out at&#xD;&#xA;" Canvas.Left="195"/>
+            <Label x:Name="lastOperation"  Height="46" Width="242" Background="#FFA3D49E" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontSize="16" FontFamily="Times New Roman" Content="Last operation was carried out at&#xD;&#xA;" Canvas.Left="181"/>
         </Canvas>
     </Grid>
 </Window>

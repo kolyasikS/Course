@@ -21,7 +21,9 @@ namespace CourseM
 {
     public partial class MainWindow : Window
     {
-        private BindingList<Client> clients;            
+        private BindingList<Client> clients;   
+        public enum ELanguage {english = 1, french = 2, spanish = 3};
+        public ELanguage language;
         public BindingList<Client> Clients
         {
             get { return clients; }
@@ -42,6 +44,7 @@ namespace CourseM
 
             SetPositionInScreen(this);
             Clients ??= new BindingList<Client>();
+            language = ELanguage.english;
         }
         private void Add_Client(object sender, RoutedEventArgs e)
         {
@@ -89,7 +92,7 @@ namespace CourseM
 
                 Screen SetPositionInScreenDEL = new Screen(SetPositionInScreen);
 
-                PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).password, SetPositionInScreenDEL);
+                PasswordClient1 passwordClient = new PasswordClient1(((Client)list.SelectedItem).password, SetPositionInScreenDEL, language);
                 passwordClient.ShowDialog();
 
                 if (!passwordClient.isChecked)
@@ -250,6 +253,62 @@ namespace CourseM
                 withdraw_deposit.IsEnabled = true;
                 IsUser.Content = "You entered as a Client";
             }
+        }
+
+        private void SetEnglishLanguage(object sender, RoutedEventArgs e)
+        {
+            // MainWindow 
+            this.Title = "Bank";
+
+            TitleAccountData.Text  = "Bank account DATA";
+            TitlePassportData.Text = "Passport DATA";
+            lastOperation.Content  = "Last operation was carried out at\n";
+
+            login.Content = "Log in";
+            registerButton.Content = "Register";
+            DeleteButton.Content = "Delete";
+            changeUserButton.Content = "Change user...";
+            withdraw_deposit.Content = "Withdraw / Deposit";
+            // MainWindow 
+
+            language = ELanguage.english;
+        }
+
+        private void SetSpanishLanguage(object sender, RoutedEventArgs e)
+        {
+            // MainWindow 
+            this.Title = "Banco";
+
+            TitleAccountData.Text = "DATOS de la cuenta bancaria";
+            TitlePassportData.Text = "Datos del pasaporte";
+            lastOperation.Content = "La última operación se llevó a cabo en\n";
+
+            login.Content = "Iniciar";
+            registerButton.Content = "Registro";
+            DeleteButton.Content = "Borrar";
+            changeUserButton.Content = "Cambiar usuario...";
+            withdraw_deposit.Content = "Retirar / Depósito";
+            // MainWindow 
+
+            language = ELanguage.spanish;
+        }
+
+        private void SetFrenchLanguage(object sender, RoutedEventArgs e)
+        {
+            // MainWindow 
+            this.Title = "Bank";
+
+            TitleAccountData.Text = "Bank account DATA";
+            TitlePassportData.Text = "Passport DATA";
+            lastOperation.Content = "Last operation was carried out at\n";
+
+            login.Content = "Log in";
+            registerButton.Content = "Register";
+            DeleteButton.Content = "Delete";
+            changeUserButton.Content = "Change user...";
+            withdraw_deposit.Content = "Withdraw / Deposit";
+            // MainWindow 
+
         }
     }
     

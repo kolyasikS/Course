@@ -30,8 +30,40 @@ namespace CourseM
 
             mainWindow.SetPositionInScreen(this);
             passwordOfAdmin = "Course2022";
+            SetLanguage(mainWindow.language);
         }
+        private void SetLanguage(MainWindow.ELanguage language)
+        {
+            if (language == MainWindow.ELanguage.spanish)
+            {
+                this.Title = "Usuarios";
 
+                welcomeLabel.Content = "¡Bienvenido a \"El club\", amigo!\nPara entrar elige quién eres.";
+                enterAdButton.Content = "Entrar como Administrador";
+                enterClButton.Content = "Entrar como Cliente";
+
+                EnterButton.Content = "Ingresar";
+                CancelButton.Content = "Cancelar";
+                Quit.Content = "Salir del banco";
+
+                password1.Content = "Introducir la contraseña:";
+
+                password2.VerticalContentAlignment = VerticalAlignment.Top;
+                password2.Content = "Ingrese de nuevo la\ncontraseña:";
+            }
+            else if (language == MainWindow.ELanguage.french)
+            {
+                this.Title = "";
+
+                welcomeLabel.Content = "";
+                enterAdButton.Content = "";
+                enterClButton.Content = "";
+
+                EnterButton.Content = "";
+                CancelButton.Content = "";
+                Quit.Content = "";
+            }
+        }
         private void EnterAdmin(object sender, RoutedEventArgs e)
         {
             password1.Visibility = Visibility.Visible;
@@ -40,7 +72,6 @@ namespace CourseM
             passwordAttempt2.Visibility = Visibility.Visible;
             EnterButton.Visibility = Visibility.Visible;
         }
-
         private void EnterAdministrator(object sender, RoutedEventArgs e)
         {
             if (passwordAttempt1.Password != passwordAttempt2.Password)
@@ -57,14 +88,10 @@ namespace CourseM
             isAdmin = 1;
             Close();
         }
-
-
-
         private void QuitBank(object sender, RoutedEventArgs e)
         {
             this.Owner.Close();
         }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (isAdmin == -1)
@@ -72,13 +99,11 @@ namespace CourseM
                 this.Owner.Close();
             }
         }
-
         private void EnterClient(object sender, RoutedEventArgs e)
         {
             isAdmin = 0;
             Close();
         }
-
         private void Cancel(object sender, RoutedEventArgs e)
         {
             Close();

@@ -21,16 +21,31 @@ namespace CourseM
     {
         public SecondBlank secondBlank { get; }
         public FirstBlank firstBlank { get; }
+        MainWindow mainwin;
         public Blank(MainWindow mainwin, string path)
         {
             InitializeComponent();
 
             firstBlank = new FirstBlank(mainwin, this, path);
             secondBlank = new SecondBlank(firstBlank, mainwin, this, path);
-
+            
+            this.mainwin = mainwin;
             mainwin.SetPositionInScreen(this);
 
             BlankPage.Content = firstBlank;
+            SetLanguage();
+        }
+
+        private void SetLanguage()
+        {
+            if (mainwin.language == MainWindow.ELanguage.spanish)
+            {
+                this.Title = "Blanco";
+            }
+            else if (mainwin.language == MainWindow.ELanguage.french)
+            {
+
+            }
         }
     }
 }

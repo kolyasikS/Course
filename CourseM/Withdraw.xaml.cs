@@ -37,7 +37,11 @@ namespace CourseM
             _fileIO = new FileIO(path);
 
             SetPositionInScreen();
-
+            SetLanguage();
+        }
+        public Withdraw()
+        {
+            InitializeComponent();
         }
 
         private void SetVisibleButtons(Client client)
@@ -58,6 +62,31 @@ namespace CourseM
                 {
                     withdrawButton.IsEnabled = true;
                 }
+            }
+        }
+        private void SetLanguage()
+        {
+            if (mainwin.language == MainWindow.ELanguage.spanish)
+            {
+                this.Title = "Operación";
+
+                moneyYouHave.Content = "Dinero que tienes:";
+                sumForOper.Content = "Suma para la operación:";
+
+                depositButton.Content = "Depósito";
+                withdrawButton.Content = "Retirar";
+                cancelButton.Content = "Cancelar";
+            }
+            else if (mainwin.language == MainWindow.ELanguage.french)
+            {
+                this.Title = "";
+
+                moneyYouHave.Content = ":";
+                sumForOper.Content = ":";
+
+                depositButton.Content = "";
+                withdrawButton.Content = "";
+                cancelButton.Content = "";
             }
         }
         private void ToWithdraw(object sender, RoutedEventArgs e)

@@ -22,14 +22,35 @@ namespace CourseM
         private string password;
         public bool isChecked = false;
 
-        public PasswordClient1(string password, MainWindow.Screen SetPositionInScreen)
+        public PasswordClient1(string password, MainWindow.Screen SetPositionInScreen, MainWindow.ELanguage language)
         {
             InitializeComponent();
 
             this.password = password;
             SetPositionInScreen(this);
+            SetLanguage(language);
         }
+        private void SetLanguage(MainWindow.ELanguage language)
+        {
+            if (language == MainWindow.ELanguage.spanish)
+            {
+                this.Title = "Iniciar";
+                enterPassLabel.Content = "Introducir la contraseña:";
+                enterPassAgLabel.Content = "Ingrese de nuevo\nla contraseña:";
 
+                cancelButton.Content = "Cancelar";
+                logInButton.Content = "Iniciar";
+            }
+            else if (language == MainWindow.ELanguage.french)
+            {
+                this.Title = "";
+                enterPassLabel.Content = "";
+                enterPassAgLabel.Content = "";
+
+                cancelButton.Content = "";
+                logInButton.Content = "";
+            }
+        }
         private void LogIn(object sender, RoutedEventArgs e)
         {
             if (passwordAttempt1.Password != passwordAttempt2.Password)
