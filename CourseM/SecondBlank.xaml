@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CourseM"
       mc:Ignorable="d" 
       Title="Blank"
-      FocusManager.FocusedElement="{Binding ElementName=leftMarginTextBox}" Height="330" Width="260" Loaded="Page_Loaded">
+      FocusManager.FocusedElement="{Binding ElementName=leftMarginTextBox}" Height="330" Width="260" Loaded="Page_Loaded" KeyDown="Page_KeyDown">
     <Grid Background="White">
         <Grid.Resources>
             <!-- Default settings for controls -->

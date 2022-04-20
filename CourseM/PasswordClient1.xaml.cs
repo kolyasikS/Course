@@ -72,5 +72,14 @@ namespace CourseM
             isChecked = false;
             Close();
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                Help help = new Help();
+                help.Show();
+            }
+        }
     }
 }

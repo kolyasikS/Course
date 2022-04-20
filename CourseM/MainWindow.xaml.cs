@@ -350,7 +350,8 @@ namespace CourseM
         {
             if(e.Key == Key.F1)
             {
-                MessageBox.Show("Help");
+                Help help = new Help();
+                help.Show();
             }
         }
     }

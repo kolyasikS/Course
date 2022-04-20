@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CourseM" d:DataContext="{d:DesignInstance Type=local:App}"
         mc:Ignorable="d"
         Icon="Resources\icon2.jpg"
-        Title="Users" Height="272" Width="382" ResizeMode="NoResize" Closing="Window_Closing">
+        Title="Users" Height="272" Width="382" ResizeMode="NoResize" Closing="Window_Closing" KeyDown="Window_KeyDown">
     <Grid Background="#FFA7F4CC">
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">

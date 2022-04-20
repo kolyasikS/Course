@@ -168,6 +168,13 @@ namespace CourseM
         {
             Close();
         }
-
+        private void Window_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                Help help = new Help();
+                help.Show();
+            }
+        }
     }
 }

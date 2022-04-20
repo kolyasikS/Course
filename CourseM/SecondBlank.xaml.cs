@@ -308,6 +308,13 @@ namespace CourseM
 
         }
 
-        
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                Help help = new Help();
+                help.Show();
+            }
+        }
     }
 }
