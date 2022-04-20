@@ -244,14 +244,47 @@ namespace CourseM
                 isAdmin = true;
                 registerButton.IsEnabled = false;
                 withdraw_deposit.IsEnabled = false;
-                IsUser.Content = "You entered as an Administrator";
+                ShowEnteredUser(true);
+                
             }
             else if (enter.isAdmin == 0)
             {
                 isAdmin = false;
                 registerButton.IsEnabled = true;
                 withdraw_deposit.IsEnabled = true;
-                IsUser.Content = "You entered as a Client";
+                ShowEnteredUser(false);            }
+        }
+        private void ShowEnteredUser(bool _isAdmin)
+        {
+            if (_isAdmin)
+            {
+                switch(language)
+                {
+                    case ELanguage.english:
+                        IsUser.Content = "You entered as an Administrator";
+                        break;
+                    case ELanguage.spanish:
+                        IsUser.Content = "Estás registrado como administrador";
+                        break;
+                    case ELanguage.french:
+                        IsUser.Content = "Vous êtes entré en tant qu'administrateur";
+                        break;
+                }
+            }
+            else if (isAdmin == false)
+            {
+                switch (language)
+                {
+                    case ELanguage.english:
+                        IsUser.Content = "You entered as a Client";
+                        break;
+                    case ELanguage.spanish:
+                        IsUser.Content = "Entraste como Cliente";
+                        break;
+                    case ELanguage.french:
+                        IsUser.Content = "Vous êtes entré en tant que client";
+                        break;
+                }
             }
         }
         private void SetEnglishLanguage(object sender, RoutedEventArgs e)
@@ -271,6 +304,7 @@ namespace CourseM
             // MainWindow 
 
             language = ELanguage.english;
+            ShowEnteredUser(isAdmin);
         }
         private void SetSpanishLanguage(object sender, RoutedEventArgs e)
         {
@@ -289,8 +323,8 @@ namespace CourseM
             // MainWindow 
 
             language = ELanguage.spanish;
+            ShowEnteredUser(isAdmin);
         }
-
         private void SetFrenchLanguage(object sender, RoutedEventArgs e)
         {
             // MainWindow 
@@ -305,9 +339,19 @@ namespace CourseM
             DeleteButton.Content = "Supprimer";
             changeUserButton.Content = "Changer\nd'utilisateur...";
             withdraw_deposit.Content = "Retirer / Verser";
+
             // MainWindow 
 
             language = ELanguage.french;
+            ShowEnteredUser(isAdmin);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.F1)
+            {
+                MessageBox.Show("Help");
+            }
         }
     }
     

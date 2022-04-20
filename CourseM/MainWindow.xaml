@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CourseM" d:DataContext="{d:DesignInstance Type=local:App}"
         mc:Ignorable="d"
         Icon="Resources\icon2.jpg"
-        Title="Bank" Height="470" Width="836" ResizeMode="CanMinimize" FontSize="14" Loaded="Window_Loaded">
+        Title="Bank" Height="470" Width="836" ResizeMode="CanMinimize" FontSize="14" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -70,8 +70,8 @@
             </Canvas>
         </StackPanel>
         <Canvas Margin="371,366,0,0">
-            <Label x:Name="IsUser" Canvas.Left="192" Canvas.Top="-37" HorizontalAlignment="Center" VerticalAlignment="Top" Width="244" Background="Transparent" FontSize="16" FontFamily="Yu Gothic UI" Foreground="#FF00FF0B" Height="36"></Label>
-            <Label x:Name="lastOperation"  Height="46" Width="242" Background="#FFA3D49E" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontSize="16" FontFamily="Times New Roman" Content="Last operation was carried out at&#xD;&#xA;" Canvas.Left="181"/>
+            <Label x:Name="IsUser" Canvas.Left="127" Canvas.Top="-41" HorizontalAlignment="Left" VerticalAlignment="Center" Width="337" Background="Transparent" FontSize="16" FontFamily="Yu Gothic UI" Foreground="#FF00FF0B" Height="36"></Label>
+            <Label x:Name="lastOperation"  Height="46" Width="265" Background="#FFA3D49E" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontSize="16" FontFamily="Times New Roman" Content="Last operation was carried out at&#xD;&#xA;" Canvas.Left="127"/>
         </Canvas>
     </Grid>
 </Window>

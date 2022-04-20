@@ -38,6 +38,9 @@ namespace CourseM
             PATH = path;
 
             dateTime = DateTime.Now;
+
+            termDeposit.IsEnabled = false;   
+
             SetLanguage();
         }
         private void SetLanguage()
@@ -160,27 +163,6 @@ namespace CourseM
             }
 
             string currency;
-
-
-            /*
-            <TextBlock>Pound sterling (GBP) - £</TextBlock>
-            <TextBlock>Euro	(EUR) - €</TextBlock>
-            <TextBlock>US dollar (USD) - $</TextBlock>
-            <TextBlock>Japanese yen	(JPY) - ¥</TextBlock>
-            <TextBlock>S Korean won (KRW) - ₩</TextBlock>
-
-            ((TextBlock)currency.Items[0]).Text = "Libra esterlina (GBP) - £";
-            ((TextBlock)currency.Items[1]).Text = "Euro (EUR) - €";
-            ((TextBlock)currency.Items[2]).Text = "Dólar estadounidense (USD) - $";
-            ((TextBlock)currency.Items[3]).Text = "Yen japonés (JPY) - ¥";
-            ((TextBlock)currency.Items[4]).Text = "Won surcoreano (KRW) - ₩";
-
-            ((TextBlock)currency.Items[0]).Text = "Livre sterling (GBP) - £";
-            ((TextBlock)currency.Items[1]).Text = "Euro (EUR) - €";
-            ((TextBlock)currency.Items[2]).Text = "Dollar américain (USD) - $";
-            ((TextBlock)currency.Items[3]).Text = "Yen japonais (JPY) - ¥";
-            ((TextBlock)currency.Items[4]).Text = "Won sud-coréen (KRW) - ₩";*/
-
 
             switch (((TextBlock)firstBlank.currency.SelectedItem).Text[0])
             {
@@ -326,9 +308,6 @@ namespace CourseM
 
         }
 
-        /*private void termDeposit_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //MessageBox.Show(termDeposit.SelectedIndex.ToString());
-        }*/
+        
     }
 }
