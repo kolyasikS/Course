@@ -21,6 +21,7 @@ namespace CourseM
     {
         public int isAdmin;
         private string passwordOfAdmin;
+        MainWindow.ELanguage eLanguage;
         public Enter(MainWindow mainWindow, int IsAdmin = -1)
         {
             InitializeComponent();
@@ -30,8 +31,50 @@ namespace CourseM
 
             mainWindow.SetPositionInScreen(this);
             passwordOfAdmin = "Course2022";
-        }
 
+            this.eLanguage = mainWindow.language;
+            SetLanguage(mainWindow.language);
+        }
+        private void SetLanguage(MainWindow.ELanguage language)
+        {
+            if (language == MainWindow.ELanguage.spanish)
+            {
+                this.Title = "Usuarios";
+
+                welcomeLabel.Content = "¡Bienvenido a \"El club\", amigo!\nPara entrar elige quién eres.";
+                enterAdButton.Content = "Entrar como Administrador";
+                enterClButton.Content = "Entrar como Cliente";
+
+                EnterButton.Content = "Ingresar";
+                CancelButton.Content = "Cancelar";
+                Quit.Content = "Salir del banco";
+
+                password1.Content = "Introducir la contraseña:";
+
+                password2.VerticalContentAlignment = VerticalAlignment.Top;
+                password2.Content = "Ingrese de nuevo la\ncontraseña:";
+            }
+            else if (language == MainWindow.ELanguage.french)
+            {
+                this.Title = "Utilisateurs";
+
+                welcomeLabel.Content = "Bienvenue \"Au club\", mon pote!\nPour participer, choisissez qui vous êtes.";
+
+                enterAsSP.Width = 340;
+                enterAdButton.Width = 175;
+                enterAdButton.Content = "Entrer en tant qu'Administrateur";
+                enterClButton.Content = "Entrer en tant que Client";
+
+                EnterButton.Content = "Entrer";
+                CancelButton.Content = "Annuler";
+                Quit.Content = "Quitter la banque";
+
+                password1.Content = "Entrer le mot de passe:";
+
+                password2.VerticalContentAlignment = VerticalAlignment.Top;
+                password2.Content = "Saisissez à nouveau le\nmot de passe:";
+            }
+        }
         private void EnterAdmin(object sender, RoutedEventArgs e)
         {
             password1.Visibility = Visibility.Visible;
@@ -40,31 +83,48 @@ namespace CourseM
             passwordAttempt2.Visibility = Visibility.Visible;
             EnterButton.Visibility = Visibility.Visible;
         }
-
         private void EnterAdministrator(object sender, RoutedEventArgs e)
         {
             if (passwordAttempt1.Password != passwordAttempt2.Password)
             {
-                MessageBox.Show("The passwords don`t match!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (eLanguage)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("The passwords don`t match!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡Las contraseñas no coinciden!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Les mots de passe ne correspondent pas!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return;
             }
             if (passwordAttempt1.Password != passwordOfAdmin)
             {
-                MessageBox.Show("You entered a wrong password!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (eLanguage)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("You entered a wrong password!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡Has introducido una contraseña incorrecta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Vous avez entré un mauvais mot de passe!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return;
             }
 
             isAdmin = 1;
             Close();
         }
-
-
-
         private void QuitBank(object sender, RoutedEventArgs e)
         {
             this.Owner.Close();
         }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (isAdmin == -1)
@@ -72,16 +132,23 @@ namespace CourseM
                 this.Owner.Close();
             }
         }
-
         private void EnterClient(object sender, RoutedEventArgs e)
         {
             isAdmin = 0;
             Close();
         }
-
         private void Cancel(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                Help help = new Help();
+                help.Show();
+            }
         }
     }
 }

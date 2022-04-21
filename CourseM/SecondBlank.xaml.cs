@@ -38,28 +38,103 @@ namespace CourseM
             PATH = path;
 
             dateTime = DateTime.Now;
+
+            termDeposit.IsEnabled = false;   
+
+            SetLanguage();
+        }
+        private void SetLanguage()
+        {
+            if (mainwin.language == MainWindow.ELanguage.spanish)
+            {
+                registerButton.Content = "Registro";
+                passwordLabel.Content = "Clave:";
+                termOfDepLabel.Content = "Plazo de depósito:";
+                catOfDepLabel.Content = "Categoría de\ndepósito:";
+
+                ((TextBlock)categoryOfDeposit.Items[0]).Text = "Depósito a la vista";
+                ((TextBlock)categoryOfDeposit.Items[1]).Text = "Depósito a plazo";
+
+                ((TextBlock)termDeposit.Items[0]).Text = "1 mes";
+                ((TextBlock)termDeposit.Items[1]).Text = "3 meses";
+                ((TextBlock)termDeposit.Items[2]).Text = "6 meses";
+                ((TextBlock)termDeposit.Items[3]).Text = "1 año";
+                ((TextBlock)termDeposit.Items[4]).Text = "3 años";
+
+
+            }
+            else if (mainwin.language == MainWindow.ELanguage.french)
+            {
+                registerButton.Content = "S'inscrire";
+                passwordLabel.Content = "Mot de passe:";
+                termOfDepLabel.Content = "Durée du dépôt:";
+                catOfDepLabel.Content = "Catégorie\nde dépôt:";
+
+                ((TextBlock)categoryOfDeposit.Items[0]).Text = "Dépôt de la demande";
+                ((TextBlock)categoryOfDeposit.Items[1]).Text = "Dépôt à terme";
+
+                ((TextBlock)termDeposit.Items[0]).Text = "1 mois";
+                ((TextBlock)termDeposit.Items[1]).Text = "3 mois";
+                ((TextBlock)termDeposit.Items[2]).Text = "6 mois";
+                ((TextBlock)termDeposit.Items[3]).Text = "1 an";
+                ((TextBlock)termDeposit.Items[4]).Text = "3 ans";
+            }
         }
         private bool CheckData(string genderType, ref int temp_int, ref double temp_double)
         {
+            string catOfDepStr = ((TextBlock)categoryOfDeposit.SelectedItem).Text;
             if (firstBlank.name.Text == "" || firstBlank.surname.Text == "" || firstBlank.numOfPass.Text == ""
                 || genderType == "" || firstBlank.sum.Text == ""
                 || categoryOfDeposit.SelectedItem == null || firstBlank.currency.SelectedItem == null || (termDeposit.SelectedItem == null
-                && ((TextBlock)categoryOfDeposit.SelectedItem).Text == "Term deposit"))
+                && (catOfDepStr == "Term deposit" || catOfDepStr == "Dépôt à terme" || catOfDepStr == "Depósito a plazo")))
             {
-                MessageBox.Show("You didn`t fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("You didn't fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡No has rellenado todos los campos!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Vous n'avez pas rempli tous les champs!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return false;
             }
 
             if (passwordField.Password.Length < 6)
             {
-                MessageBox.Show("Password must contain >5 symbols!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("Password must contain > 5 symbols!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡La contraseña debe contener más de 5 símbolos!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Le mot de passe doit contenir > 5 symboles !", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return false;
             }
 
             if (!int.TryParse(firstBlank.numOfPass.Text, out temp_int)
                 || firstBlank.numOfPass.Text.Length != 9)
             {
-                MessageBox.Show("Passport No has to be none-digit number!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("Passport No has to be nine-digit number!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("Pasaporte No tiene que ser un número de nueve dígitos!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Le numéro de passeport doit être un numéro à neuf chiffres !", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return false;
             }
 
@@ -67,7 +142,18 @@ namespace CourseM
                 || firstBlank.sum.Text.Length < 5
                 || firstBlank.sum.Text.Length > 9)
             {
-                MessageBox.Show("We cannot accept that sum. Reread the conditions of our bank again!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("We cannot accept that sum. Reread the conditions of our bank again!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("No podemos aceptar esa suma. ¡Vuelve a leer las condiciones de nuestro banco!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Nous ne pouvons pas accepter cette somme. Relisez à nouveau les conditions de notre banque !", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return false;
             }
 
@@ -75,7 +161,9 @@ namespace CourseM
         }
         private void CreateClient(object sender, RoutedEventArgs e)
         {
-            string genderType = firstBlank.genderType;
+            string genderType = firstBlank.genderType == "Mâle" || firstBlank.genderType == "Masculino"
+                || firstBlank.genderType == "Male" ? "Male" : "Female";
+            
             int temp_int = 0;
             double temp_double = 0;
             if (!CheckData(genderType, ref temp_int, ref temp_double))
@@ -83,33 +171,62 @@ namespace CourseM
                 return;
             }
 
+
+
             string catOfDeposit = ((TextBlock)categoryOfDeposit.SelectedItem).Text;
             string termOfDep;
-            if (catOfDeposit == "Demand deposit")
+            if (catOfDeposit == "Demand deposit" || catOfDeposit == "Dépôt de la demande" || catOfDeposit == "Depósito a la vista")
             {
+                catOfDeposit = "Demand deposit";
                 termOfDep = "No term";
             }
             else
             {
-                termOfDep = ((TextBlock)termDeposit.SelectedItem).Text;
+                catOfDeposit = "Term deposit";
+                switch (termDeposit.SelectedIndex)
+                {
+                    case 0:
+                        termOfDep = "1 month";
+                        break;
+                    case 1:
+                        termOfDep = "3 months";
+                        break;
+                    case 2:
+                        termOfDep = "6 months";
+                        break;
+                    case 3:
+                        termOfDep = "1 year";
+                        break;
+                    case 4:
+                        termOfDep = "3 years";
+                        break;
+                    default:
+                        return;
+                }
+
             }
 
             string currency;
+
             switch (((TextBlock)firstBlank.currency.SelectedItem).Text[0])
             {
                 case 'P':
+                case 'L':
                     currency = "£";
                     break;
                 case 'E':
                     currency = "€";
                     break;
                 case 'U':
+                case 'D':
                     currency = "$";
                     break;
                 case 'J':
+                case 'Y':
                     currency = "¥";
                     break;
                 case 'S':
+                case 'W':
                     currency = "₩";
                     break;
                 default:
@@ -137,7 +254,6 @@ namespace CourseM
             blank.Close();
 
         }
-       
         private float SetInterestR(string termOfDep, string currency, ref int amountOfM)
         {
             float[,] tableOfInterestsRate = new float[5, 6]
@@ -232,6 +348,15 @@ namespace CourseM
             else
             {
                 termDeposit.IsEnabled = true;
+            }
+
+        }
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                Help help = new Help();
+                help.Show();
             }
         }
     }

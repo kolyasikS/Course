@@ -37,7 +37,11 @@ namespace CourseM
             _fileIO = new FileIO(path);
 
             SetPositionInScreen();
-
+            SetLanguage();
+        }
+        public Withdraw()
+        {
+            InitializeComponent();
         }
 
         private void SetVisibleButtons(Client client)
@@ -60,12 +64,48 @@ namespace CourseM
                 }
             }
         }
+        private void SetLanguage()
+        {
+            if (mainwin.language == MainWindow.ELanguage.spanish)
+            {
+                this.Title = "Operación";
+
+                moneyYouHave.Content = "Dinero que tienes:";
+                sumForOper.Content = "Suma para la operación:";
+
+                depositButton.Content = "Depósito";
+                withdrawButton.Content = "Retirar";
+                cancelButton.Content = "Cancelar";
+            }
+            else if (mainwin.language == MainWindow.ELanguage.french)
+            {
+                this.Title = "Opération";
+
+                moneyYouHave.Content = "L'argent que vous avez:";
+                sumForOper.Content = "Somme pour l'opération:";
+
+                depositButton.Content = "Verser";
+                withdrawButton.Content = "Retirer";
+                cancelButton.Content = "Annuler";
+            }
+        }
         private void ToWithdraw(object sender, RoutedEventArgs e)
         {
             double temp_double;
             if (!double.TryParse(sumWithdraw.Text, out temp_double) || temp_double > client.sum)
             {
-                MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡Escribió una cantidad incorrecta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Vous avez tapé un montant incorrect!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
                 return;
             }
             ((Client)mainwin.list.SelectedItem).sum = client.sum -= temp_double;
@@ -97,7 +137,18 @@ namespace CourseM
             double temp_double;
             if (!double.TryParse(sumWithdraw.Text, out temp_double) || temp_double > double.MaxValue - client.sum)
             {
-                MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡Escribió una cantidad incorrecta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Vous avez tapé un montant incorrect!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
                 return;
             }
             ((Client)mainwin.list.SelectedItem).sum = client.sum += temp_double;
@@ -139,6 +190,13 @@ namespace CourseM
         {
             Close();
         }
-
+        private void Window_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                Help help = new Help();
+                help.Show();
+            }
+        }
     }
 }

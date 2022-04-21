@@ -7,7 +7,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         ShowInTaskbar="True"
-        FocusManager.FocusedElement="{Binding ElementName=leftMarginTextBox}" Height="319" Width="251">
+        FocusManager.FocusedElement="{Binding ElementName=leftMarginTextBox}" Height="319" Width="251" KeyDown="Window_KeyDown">
     
         <Frame x:Name="BlankPage" NavigationUIVisibility="Hidden" Margin="5"/>
    

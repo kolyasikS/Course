@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CourseM" d:DataContext="{d:DesignInstance Type=local:App}"
         mc:Ignorable="d"
         Icon="Resources\icon2.jpg"
-        Title="Operation" Height="137" ResizeMode="NoResize" Width="290">
+        Title="Operation" Height="137" ResizeMode="NoResize" Width="294" KeyDown="Window_KeyDown_1">
     <Grid>
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
@@ -17,7 +17,7 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="103*"/>
+            <ColumnDefinition Width="145"/>
             <ColumnDefinition Width="120*"/>
         </Grid.ColumnDefinitions>
 
@@ -27,16 +27,16 @@
 
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Money you have:"/>
-        <Label Grid.Column="1" Grid.Row="0" x:Name="havingMoney"/>
+        <Label x:Name="moneyYouHave" Grid.Column="0" Grid.Row="0" Content="Money you have:"/>
+        <Label Grid.Column="1" Grid.Row="0" x:Name="havingMoney" Margin="10,0,0,30" Grid.RowSpan="2"/>
 
-        <Label Grid.Column="0" Grid.Row="1" Content="Sum for operation:" Margin="0,1,156,2" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="sumWithdraw" Grid.Column="1" Grid.Row="1" Margin="0,5,10,5"/>
+        <Label x:Name="sumForOper" Grid.Column="0" Grid.Row="1" Content="Sum for operation:" Margin="0,1,0,2"/>
+        <TextBox x:Name="sumWithdraw" Grid.Column="1" Grid.Row="1" Margin="10,5,8,5"/>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal" Margin="72,30,0,-37" Width="201" Grid.ColumnSpan="2">
             <Button x:Name="depositButton" Content="Deposit" Click="ToDeposit"/>
             <Button x:Name="withdrawButton" Content="Withdraw" Click="ToWithdraw"/>
-            <Button Content="Cancel" Click="Cancel"/>
+            <Button x:Name="cancelButton" Content="Cancel" Click="Cancel"/>
         </StackPanel>
     </Grid>
 </Window>
