@@ -212,7 +212,19 @@ namespace CourseM
         {
             passport.Text = "";
             accountData.Text = "";
-            lastOperation.Content = "Last operation was carried out at\n";
+
+            switch(language)
+            {
+                case ELanguage.english:
+                    lastOperation.Content = "Last operation was carried out at\n";
+                    break;
+                case ELanguage.spanish:
+                    lastOperation.Content = "La última operación se llevó a cabo en\n";
+                    break;
+                case ELanguage.french:
+                    lastOperation.Content = "La dernière transaction a eu lieu en\n";
+                    break;
+            }
             numberOfAccount = 0;
         }
         private void SavaLoadFile(string choice)
@@ -246,25 +258,85 @@ namespace CourseM
         public void ShowDataClient(Client temp, string tempTermDeposit, double sumAfterTerm)
         {
             string String_SumAfterTerm = "";
-            if (!temp.isEndedTerm)
+
+            switch (language)
             {
-                String_SumAfterTerm = "After " + ((temp.dateOfDepositing.AddDays(temp.amountOfMonth * 30) - DateTime.Now).Days).ToString() + " days you give: " + sumAfterTerm;
+                case ELanguage.english:
+                    {
+                        if (!temp.isEndedTerm)
+                        {
+                            String_SumAfterTerm = "After " + ((temp.dateOfDepositing.AddDays(temp.amountOfMonth * 30) - DateTime.Now).Days).ToString() + " days you give: " + sumAfterTerm;
+                        }
+                        else
+                        {
+                            String_SumAfterTerm = "Expired. You can withdraw your money.";
+                        }
+
+                        passport.Text = "Full name: " + temp.nameClient + " " + temp.surname + ".\n"
+                            + "Date of birthday: " + temp.birthDate.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".\n"
+                            + "Gender: " + temp.gender + ".\n"
+                            + "Number of passport: " + temp.passportNo + ".";
+                        accountData.Text = "Number of account: " + temp.numOfAccount + ".\n"
+                            + "Sum of Deposit: " + temp.sum + " " + temp.currency + "\n\n"
+                            + "Category of deposit: " + temp.categoryOfDeposit + ". " + temp.termOfDeposit + ".\n"
+                            + "Date of depositing: " + temp.dateOfDepositing.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".  Interest rate: " + temp.interestRate + "%\n"
+                            + String_SumAfterTerm;
+                        lastOperation.Content = "Last operation was carried out at\n";
+                        lastOperation.Content += temp.lastOperation.ToString();
+                    }
+                    break;
+                case ELanguage.spanish:
+                    {
+                        if (!temp.isEndedTerm)
+                        {
+                            String_SumAfterTerm = "Después de " + ((temp.dateOfDepositing.AddDays(temp.amountOfMonth * 30) - DateTime.Now).Days).ToString() + " dias das: " + sumAfterTerm;
+                        }
+                        else
+                        {
+                            String_SumAfterTerm = "Venció. Puedes retirar tu dinero.";
+                        }
+
+                        passport.Text = "Nombre completo: " + temp.nameClient + " " + temp.surname + ".\n"
+                            + "Fecha de cumpleaños: " + temp.birthDate.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".\n"
+                            + "Género: " + temp.gender + ".\n"
+                            + "Número de pasaporte: " + temp.passportNo + ".";
+                        accountData.Text = "Número de cuenta: " + temp.numOfAccount + ".\n"
+                            + "Suma del Depósito: " + temp.sum + " " + temp.currency + "\n\n"
+                            + "Categoría de depósito: " + temp.categoryOfDeposit + ". " + temp.termOfDeposit + ".\n"
+                            + "Fecha de depósito: " + temp.dateOfDepositing.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".  Tasa de interés: " + temp.interestRate + "%\n"
+                            + String_SumAfterTerm;
+                        lastOperation.Content = "La última operación se llevó a cabo en\n";
+                        lastOperation.Content += temp.lastOperation.ToString();
+                    }
+                    break;
+                case ELanguage.french:
+                    {
+                        if (!temp.isEndedTerm)
+                        {
+                            String_SumAfterTerm = "Après " + ((temp.dateOfDepositing.AddDays(temp.amountOfMonth * 30) - DateTime.Now).Days).ToString() + " jours vous donnez: " + sumAfterTerm;
+                        }
+                        else
+                        {
+                            String_SumAfterTerm = "Expiré. Vous pouvez retirer votre argent.";
+                        }
+
+                        passport.Text = "Nom complet: " + temp.nameClient + " " + temp.surname + ".\n"
+                            + "Date d'anniversaire: " + temp.birthDate.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".\n"
+                            + "Le sexe: " + temp.gender + ".\n"
+                            + "Numéro de passeport: " + temp.passportNo + ".";
+                        accountData.Text = "Numéro de compte: " + temp.numOfAccount + ".\n"
+                            + "Somme du dépôt: " + temp.sum + " " + temp.currency + "\n\n"
+                            + "Catégorie de dépôt: " + temp.categoryOfDeposit + ". " + temp.termOfDeposit + ".\n"
+                            + "Durée du dépôt: " + temp.dateOfDepositing.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".  Taux d'intérêt: " + temp.interestRate + "%\n"
+                            + String_SumAfterTerm;
+                        lastOperation.Content = "La dernière transaction a eu lieu en\n";
+                        lastOperation.Content += temp.lastOperation.ToString();
+                    }
+                    break;
             }
-            else
-            {
-                String_SumAfterTerm = "Expired. You can withdraw your money.";
-            }
-            passport.Text = "Full name: " + temp.nameClient + " " + temp.surname + ".\n"
-               + "Date of birthday: " + temp.birthDate.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".\n"
-               + "Gender: " + temp.gender + ".\n"
-               + "Number of passport: " + temp.passportNo + ".";
-            accountData.Text = "Number of account: " + temp.numOfAccount + ".\n"
-                + "Sum of Deposit: " + temp.sum + " " + temp.currency + "\n\n"
-                + "Category of deposit: " + temp.categoryOfDeposit + ". " + temp.termOfDeposit + ".\n"
-                + "Date of depositing: " + temp.dateOfDepositing.ToString("d", CultureInfo.GetCultureInfo("de-De")) + ".  Interest rate: " + temp.interestRate + "%\n"
-                + String_SumAfterTerm;
-            lastOperation.Content = "Last operation was carried out at\n";
-            lastOperation.Content += temp.lastOperation.ToString();
+
+
+            
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -282,6 +354,7 @@ namespace CourseM
                 isAdmin = false;
                 IsUser.Content = "You entered as a Client";
             }
+            isAdmin = true; // TEMP
         }
         private void ChangeUser(object sender, RoutedEventArgs e)
         {
@@ -305,7 +378,6 @@ namespace CourseM
                 withdraw_deposit.IsEnabled = true;
                 ShowEnteredUser(false); }
         }
-      
         private void ShowEnteredUser(bool _isAdmin)
         {
             if (_isAdmin)
@@ -356,6 +428,23 @@ namespace CourseM
             // MainWindow 
 
             language = ELanguage.english;
+
+            if (list.SelectedItem != null && ((Client)list.SelectedItem).numOfAccount == numberOfAccount)
+            {
+                string tempTermDeposit;
+                if (((Client)list.SelectedItem).termOfDeposit == "No term")
+                {
+                    tempTermDeposit = "1 year";
+                }
+                else
+                {
+                    tempTermDeposit = ((Client)list.SelectedItem).termOfDeposit;
+                }
+                double sumAfterTerm = Math.Round(((Client)list.SelectedItem).sum + ((Client)list.SelectedItem).sum * (((Client)list.SelectedItem).interestRate), 2);
+                ShowDataClient((Client)list.SelectedItem, tempTermDeposit, sumAfterTerm);
+            }
+
+
             ShowEnteredUser(isAdmin);
         }
         private void SetSpanishLanguage(object sender, RoutedEventArgs e)
@@ -375,6 +464,22 @@ namespace CourseM
             // MainWindow 
 
             language = ELanguage.spanish;
+
+            if (list.SelectedItem != null && ((Client)list.SelectedItem).numOfAccount == numberOfAccount)
+            {
+                string tempTermDeposit;
+                if (((Client)list.SelectedItem).termOfDeposit == "No term")
+                {
+                    tempTermDeposit = "1 year";
+                }
+                else
+                {
+                    tempTermDeposit = ((Client)list.SelectedItem).termOfDeposit;
+                }
+                double sumAfterTerm = Math.Round(((Client)list.SelectedItem).sum + ((Client)list.SelectedItem).sum * (((Client)list.SelectedItem).interestRate), 2);
+                ShowDataClient((Client)list.SelectedItem, tempTermDeposit, sumAfterTerm);
+            }
+
             ShowEnteredUser(isAdmin);
         }
         private void SetFrenchLanguage(object sender, RoutedEventArgs e)
@@ -395,9 +500,24 @@ namespace CourseM
             // MainWindow 
 
             language = ELanguage.french;
+
+            if (list.SelectedItem != null && ((Client)list.SelectedItem).numOfAccount == numberOfAccount)
+            {
+                string tempTermDeposit;
+                if (((Client)list.SelectedItem).termOfDeposit == "No term")
+                {
+                    tempTermDeposit = "1 year";
+                }
+                else
+                {
+                    tempTermDeposit = ((Client)list.SelectedItem).termOfDeposit;
+                }
+                double sumAfterTerm = Math.Round(((Client)list.SelectedItem).sum + ((Client)list.SelectedItem).sum * (((Client)list.SelectedItem).interestRate), 2);
+                ShowDataClient((Client)list.SelectedItem, tempTermDeposit, sumAfterTerm);
+            }
+
             ShowEnteredUser(isAdmin);
         }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.F1)
@@ -407,6 +527,5 @@ namespace CourseM
             }
         }
     }
-    
 }
 

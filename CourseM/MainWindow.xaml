@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CourseM" d:DataContext="{d:DesignInstance Type=local:App}"
         mc:Ignorable="d"
         Icon="Resources\icon2.jpg"
-        Title="Bank" Height="470" Width="836" ResizeMode="CanMinimize" FontSize="14" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
+        Title="Bank" Height="526" Width="969" ResizeMode="CanMinimize" FontSize="14" Loaded="Window_Loaded" KeyDown="Window_KeyDown">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -111,11 +111,11 @@
             <ImageBrush ImageSource="Resources\background.jpg"></ImageBrush>
         </Grid.Background>
         <Canvas Name ="canvas" Grid.ColumnSpan="5">
-            <Button x:Name="withdraw_deposit" Content="Withdraw / Deposit" Click="Withdraw" Width="168" Canvas.Left="461" Canvas.Top="175" Background="#FFF0BB30"/>
-            <Button x:Name="login" Content="Log in" Click="Log_in" Width="98" Canvas.Left="261" Canvas.Top="220" Background="#FF228306" />
-            <Button x:Name="registerButton" Content="Register" Click="Add_Client" Width="98" Canvas.Left="261" Canvas.Top="270" Background="#FFA70909" />
-            <Button x:Name="DeleteButton" Content="Delete" Click="Delete_Client" Width="98" Canvas.Left="261" Canvas.Top="320" Background="#FF0094FF" />
-            <ListBox Name="list" ItemsSource="{Binding Path = Clients, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Margin="10,0,0,20" Height="223" Width="251" Canvas.Top="199" Foreground="#FFADAD9E" BorderBrush="#FF5A0000" SelectionChanged="list_SelectionChanged">
+            <Button x:Name="withdraw_deposit" Content="Withdraw / Deposit" Click="Withdraw" Width="168" Canvas.Top="13" Background="#FFF0BB30" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="241"/>
+            <Button x:Name="login" Content="Log in" Click="Log_in" Width="98" Canvas.Left="266" Canvas.Top="240" Background="#FF228306" RenderTransformOrigin="0.498,0.106" />
+            <Button x:Name="registerButton" Content="Register" Click="Add_Client" Width="98" Canvas.Left="266" Canvas.Top="295" Background="#FFA70909" />
+            <Button x:Name="DeleteButton" Content="Delete" Click="Delete_Client" Width="98" Canvas.Left="266" Canvas.Top="352" Background="#FF0094FF" />
+            <ListBox Name="list" ItemsSource="{Binding Path = Clients, RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Height="224" Width="251" Canvas.Top="240" Foreground="#FFADAD9E" BorderBrush="#FF5A0000" SelectionChanged="list_SelectionChanged" Canvas.Left="10" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -125,11 +125,11 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Canvas>
-        <StackPanel x:Name="stackPan" Background="#FF525252" Orientation="Horizontal" Margin="10,10,536,268">
+        <StackPanel x:Name="stackPan" Background="#FF525252" Orientation="Horizontal" Margin="422,22,61,300">
             <Canvas>
-                <TextBlock x:Name="TitlePassportData" Canvas.Left="26" Height="24" Width="222" FontSize="16" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">Passport DATA</TextBlock>
-                <TextBlock x:Name="passport" Height="142" Width="273" FontSize="17" Canvas.Left="8" Canvas.Top="29"/>
-                <ToolBar x:Name="languages" Canvas.Left="636"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="146" Background="#FFFFC456" Foreground="Black" BorderBrush="Black">
+                <TextBlock x:Name="TitlePassportData" Canvas.Left="132" Height="24" Width="222" FontSize="16" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center">Passport DATA</TextBlock>
+                <TextBlock x:Name="passport" Height="153" Width="469" FontSize="17" Canvas.Left="8" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <ToolBar x:Name="languages" Canvas.Left="-407"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="146" Background="#FFFFC456" Foreground="Black" BorderBrush="Black">
                     <Button x:Name="engish" Margin="0,0,5,0" Click="SetEnglishLanguage">
                         <Image Source="Resources/english.png" Height="20" Width="30" />
                     </Button>
@@ -140,18 +140,18 @@
                         <Image Source="Resources/spanish.png" Height="20" Width="30" />
                     </Button>
                 </ToolBar>
-                <Button x:Name="changeUserButton" Content="Change user..." Click="ChangeUser" Canvas.Left="626" Height="50" Width="156" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFA17DFF" Foreground="#FF840000" Canvas.Top="29" />
+                <Button x:Name="changeUserButton" Content="Change user..." Click="ChangeUser" Canvas.Left="-417" Height="50" Width="156" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFA17DFF" Foreground="#FF840000" Canvas.Top="31" />
             </Canvas>
         </StackPanel>
-        <StackPanel Background="#FF525252" Margin="300,10,184,268">
+        <StackPanel Background="#FF525252" Margin="422,221,61,97">
             <Canvas>
-                <TextBlock x:Name="TitleAccountData" Canvas.Left="103" Height="24" Width="142" FontSize="16" Canvas.Top="1" HorizontalAlignment="Center" VerticalAlignment="Center" >Bank account DATA</TextBlock>
-                <TextBlock x:Name="accountData" Canvas.Left="10" Canvas.Top="30" Width="336" Height="144" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TitleAccountData" Canvas.Left="172" Height="24" Width="142" FontSize="16" Canvas.Top="1" HorizontalAlignment="Left" VerticalAlignment="Center" >Bank account DATA</TextBlock>
+                <TextBlock x:Name="accountData" Canvas.Left="7" Canvas.Top="30" Width="471" Height="159" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
             </Canvas>
         </StackPanel>
-        <Canvas Margin="371,366,0,0">
-            <Label x:Name="IsUser" Canvas.Left="127" Canvas.Top="-41" HorizontalAlignment="Left" VerticalAlignment="Center" Width="337" Background="Transparent" FontSize="16" FontFamily="Yu Gothic UI" Foreground="#FF00FF0B" Height="36"></Label>
-            <Label x:Name="lastOperation"  Height="46" Width="265" Background="#FFA3D49E" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" FontSize="16" FontFamily="Times New Roman" Content="Last operation was carried out at&#xD;&#xA;" Canvas.Left="127"/>
+        <Canvas Margin="422,419,260,10">
+            <Label x:Name="IsUser" Canvas.Left="-414" Canvas.Top="-296" HorizontalAlignment="Center" VerticalAlignment="Top" Width="337" Background="Transparent" FontSize="16" FontFamily="Yu Gothic UI" Foreground="#FF00FF0B" Height="36"></Label>
+            <Label x:Name="lastOperation"  Height="46" Width="265" Background="#FFA3D49E" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontSize="16" FontFamily="Times New Roman" Content="Last operation was carried out at&#xD;&#xA;" VerticalContentAlignment="Top"/>
         </Canvas>
     </Grid>
 </Window>
