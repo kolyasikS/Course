@@ -84,9 +84,6 @@ namespace CourseM
                 cancel.Content = "Annuler";
             }
         }
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
         private void datePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             dateTime = (DateTime)datePicker.SelectedDate;

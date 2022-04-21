@@ -21,6 +21,7 @@ namespace CourseM
     {
         public int isAdmin;
         private string passwordOfAdmin;
+        MainWindow.ELanguage eLanguage;
         public Enter(MainWindow mainWindow, int IsAdmin = -1)
         {
             InitializeComponent();
@@ -30,6 +31,8 @@ namespace CourseM
 
             mainWindow.SetPositionInScreen(this);
             passwordOfAdmin = "Course2022";
+
+            this.eLanguage = mainWindow.language;
             SetLanguage(mainWindow.language);
         }
         private void SetLanguage(MainWindow.ELanguage language)
@@ -84,12 +87,34 @@ namespace CourseM
         {
             if (passwordAttempt1.Password != passwordAttempt2.Password)
             {
-                MessageBox.Show("The passwords don`t match!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (eLanguage)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("The passwords don`t match!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡Las contraseñas no coinciden!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Les mots de passe ne correspondent pas!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return;
             }
             if (passwordAttempt1.Password != passwordOfAdmin)
             {
-                MessageBox.Show("You entered a wrong password!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (eLanguage)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("You entered a wrong password!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡Has introducido una contraseña incorrecta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Vous avez entré un mauvais mot de passe!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return;
             }
 

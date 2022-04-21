@@ -21,8 +21,8 @@ namespace CourseM
 {
     public partial class MainWindow : Window
     {
-        private BindingList<Client> clients;   
-        public enum ELanguage {english = 1, french = 2, spanish = 3};
+        private BindingList<Client> clients;
+        public enum ELanguage { english = 1, french = 2, spanish = 3 };
         public ELanguage language;
         public BindingList<Client> Clients
         {
@@ -78,12 +78,34 @@ namespace CourseM
         {
             if (list.SelectedItem == null)
             {
-                MessageBox.Show("You didn`t choose an account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (language)
+                {
+                    case ELanguage.english:
+                        MessageBox.Show("You didn`t choose an account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case ELanguage.spanish:
+                        MessageBox.Show("¡No has seleccionado una cuenta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case ELanguage.french:
+                        MessageBox.Show("Vous n'avez pas sélectionné de compte!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return;
             }
             else if (passport.Text != "")
             {
-                MessageBox.Show("You are already in this account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (language)
+                {
+                    case ELanguage.english:
+                        MessageBox.Show("You are already in this account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case ELanguage.spanish:
+                        MessageBox.Show("¡Ya estás en esta cuenta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case ELanguage.french:
+                        MessageBox.Show("Vous êtes déjà dans ce compte !", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return;
             }
 
@@ -132,25 +154,54 @@ namespace CourseM
         {
             if (list.SelectedItem == null || ((Client)list.SelectedItem).numOfAccount != numberOfAccount)
             {
-                MessageBox.Show("You didn`t log in an account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (language)
+                {
+                    case ELanguage.english:
+                        MessageBox.Show("You didn`t log in an account!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case ELanguage.spanish:
+                        MessageBox.Show("¡No iniciaste sesión en una cuenta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case ELanguage.french:
+                        MessageBox.Show("Vous ne vous êtes pas connecté à un compte!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return;
             }
-            if (MessageBox.Show("Do you want to delete this account?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            switch (language)
             {
-                return;
+                case ELanguage.english:
+                    if (MessageBox.Show("Do you want to delete this account?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                        return;
+                    break;
+                case ELanguage.spanish:
+                    if (MessageBox.Show("¿Quieres eliminar esta cuenta?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                        return;
+                    break;
+                case ELanguage.french:
+                    if (MessageBox.Show("Voulez-vous supprimer ce compte?", "Alerte", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                        return;
+                    break;
             }
-            else
-            {
-                Clients.Remove((Client)list.SelectedItem);
-                SavaLoadFile("save");
-            }
-            
+            Clients.Remove((Client)list.SelectedItem);
+            SavaLoadFile("save");
         }
         private void Withdraw(object sender, RoutedEventArgs e)
         {
             if (list.SelectedItem == null || ((Client)list.SelectedItem).numOfAccount != numberOfAccount)
             {
-                MessageBox.Show("Log in to withdraw money!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (language)
+                {
+                    case ELanguage.english:
+                        MessageBox.Show("Log in to withdraw money!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case ELanguage.spanish:
+                        MessageBox.Show("¡Inicia sesión para retirar dinero!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case ELanguage.french:
+                        MessageBox.Show("Connectez-vous pour retirer de l'argent!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return;
             }
             Withdraw withdraw = new Withdraw(this, (Client)list.SelectedItem, PATH);
@@ -245,15 +296,16 @@ namespace CourseM
                 registerButton.IsEnabled = false;
                 withdraw_deposit.IsEnabled = false;
                 ShowEnteredUser(true);
-                
+
             }
             else if (enter.isAdmin == 0)
             {
                 isAdmin = false;
                 registerButton.IsEnabled = true;
                 withdraw_deposit.IsEnabled = true;
-                ShowEnteredUser(false);            }
+                ShowEnteredUser(false); }
         }
+      
         private void ShowEnteredUser(bool _isAdmin)
         {
             if (_isAdmin)

@@ -28,12 +28,12 @@
                                         VerticalAlignment="Stretch" Width="Auto" Height="Auto" 
                                         Background="{TemplateBinding Background}"/>
                         </Grid>
-                        <ControlTemplate.Triggers>
+                        <!--<ControlTemplate.Triggers>
                             <Trigger Property="Tag" Value="Horizontal">
                                 <Setter TargetName="Rectangle1" Property="Width" Value="Auto"/>
                                 <Setter TargetName="Rectangle1" Property="Height" Value="7"/>
                             </Trigger>
-                        </ControlTemplate.Triggers>
+                        </ControlTemplate.Triggers>-->
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -134,7 +134,7 @@
                 <TreeViewItem Header="Pages of blank" Selected="TreeViewItem_Selected">
 
                     <TreeViewItem Header="First page"  Selected="TreeViewItem_Selected"/>
-                    <TreeViewItem Header="Second pagek" Selected="TreeViewItem_Selected"/>
+                    <TreeViewItem Header="Second page" Selected="TreeViewItem_Selected"/>
 
                 </TreeViewItem>
             </TreeViewItem>

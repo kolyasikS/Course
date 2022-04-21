@@ -88,20 +88,53 @@ namespace CourseM
                 || categoryOfDeposit.SelectedItem == null || firstBlank.currency.SelectedItem == null || (termDeposit.SelectedItem == null
                 && (catOfDepStr == "Term deposit" || catOfDepStr == "Dépôt à terme" || catOfDepStr == "Depósito a plazo")))
             {
-                MessageBox.Show("You didn`t fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("You didn't fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡No has rellenado todos los campos!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Vous n'avez pas rempli tous les champs!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return false;
             }
 
             if (passwordField.Password.Length < 6)
             {
-                MessageBox.Show("Password must contain >5 symbols!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("Password must contain > 5 symbols!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡La contraseña debe contener más de 5 símbolos!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Le mot de passe doit contenir > 5 symboles !", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return false;
             }
 
             if (!int.TryParse(firstBlank.numOfPass.Text, out temp_int)
                 || firstBlank.numOfPass.Text.Length != 9)
             {
-                MessageBox.Show("Passport No has to be none-digit number!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("Passport No has to be nine-digit number!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("Pasaporte No tiene que ser un número de nueve dígitos!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Le numéro de passeport doit être un numéro à neuf chiffres !", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return false;
             }
 
@@ -109,7 +142,18 @@ namespace CourseM
                 || firstBlank.sum.Text.Length < 5
                 || firstBlank.sum.Text.Length > 9)
             {
-                MessageBox.Show("We cannot accept that sum. Reread the conditions of our bank again!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("We cannot accept that sum. Reread the conditions of our bank again!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("No podemos aceptar esa suma. ¡Vuelve a leer las condiciones de nuestro banco!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Nous ne pouvons pas accepter cette somme. Relisez à nouveau les conditions de notre banque !", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                }
                 return false;
             }
 
@@ -307,7 +351,6 @@ namespace CourseM
             }
 
         }
-
         private void Page_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F1)

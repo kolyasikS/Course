@@ -94,7 +94,18 @@ namespace CourseM
             double temp_double;
             if (!double.TryParse(sumWithdraw.Text, out temp_double) || temp_double > client.sum)
             {
-                MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡Escribió una cantidad incorrecta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Vous avez tapé un montant incorrect!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
                 return;
             }
             ((Client)mainwin.list.SelectedItem).sum = client.sum -= temp_double;
@@ -126,7 +137,18 @@ namespace CourseM
             double temp_double;
             if (!double.TryParse(sumWithdraw.Text, out temp_double) || temp_double > double.MaxValue - client.sum)
             {
-                MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                switch (mainwin.language)
+                {
+                    case MainWindow.ELanguage.english:
+                        MessageBox.Show("You typed incorrect amount!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case MainWindow.ELanguage.spanish:
+                        MessageBox.Show("¡Escribió una cantidad incorrecta!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                    case MainWindow.ELanguage.french:
+                        MessageBox.Show("Vous avez tapé un montant incorrect!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Error);
+                        break;
+                }
                 return;
             }
             ((Client)mainwin.list.SelectedItem).sum = client.sum += temp_double;
