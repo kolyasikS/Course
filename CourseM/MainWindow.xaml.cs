@@ -354,7 +354,6 @@ namespace CourseM
                 isAdmin = false;
                 IsUser.Content = "You entered as a Client";
             }
-            isAdmin = true; // TEMP
         }
         private void ChangeUser(object sender, RoutedEventArgs e)
         {
@@ -520,9 +519,14 @@ namespace CourseM
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+
             if(e.Key == Key.F1)
             {
                 Help help = new Help();
+                if (help.IsActive)
+                {
+                    this.Activate();
+                }
                 help.Show();
             }
         }

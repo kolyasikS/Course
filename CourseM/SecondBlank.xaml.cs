@@ -80,29 +80,85 @@ namespace CourseM
                 ((TextBlock)termDeposit.Items[4]).Text = "3 ans";
             }
         }
-        private bool CheckData(string genderType, ref int temp_int, ref double temp_double)
+        private void ErrorFillOut()
         {
-            string catOfDepStr = ((TextBlock)categoryOfDeposit.SelectedItem).Text;
-            if (firstBlank.name.Text == "" || firstBlank.surname.Text == "" || firstBlank.numOfPass.Text == ""
-                || genderType == "" || firstBlank.sum.Text == ""
-                || categoryOfDeposit.SelectedItem == null || firstBlank.currency.SelectedItem == null || (termDeposit.SelectedItem == null
-                && (catOfDepStr == "Term deposit" || catOfDepStr == "Dépôt à terme" || catOfDepStr == "Depósito a plazo")))
+            switch (mainwin.language)
             {
-                switch (mainwin.language)
-                {
-                    case MainWindow.ELanguage.english:
-                        MessageBox.Show("You didn't fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
-                    case MainWindow.ELanguage.spanish:
-                        MessageBox.Show("¡No has rellenado todos los campos!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
-                    case MainWindow.ELanguage.french:
-                        MessageBox.Show("Vous n'avez pas rempli tous les champs!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
-                }
+                case MainWindow.ELanguage.english:
+                    MessageBox.Show("You didn't fill out all fileds!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
+                case MainWindow.ELanguage.spanish:
+                    MessageBox.Show("¡No has rellenado todos los campos!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
+                case MainWindow.ELanguage.french:
+                    MessageBox.Show("Vous n'avez pas rempli tous les champs!", "Mauvais", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    break;
+            }
+        }
+        private bool CheckData(string genderType, string catOfDeposit, string termOfDep, ref int temp_int, ref double temp_double)
+        {
+            if (firstBlank.name.Text == "" || firstBlank.surname.Text == ""
+                || firstBlank.numOfPass.Text == ""
+                || firstBlank.sum.Text == ""
+                || categoryOfDeposit.SelectedItem == null || firstBlank.currency.SelectedItem == null
+                || termDeposit.SelectedItem == null)
+            {
+                ErrorFillOut();
                 return false;
             }
+            else
+            {
+                for (int i = 0; i < firstBlank.gender.Children.Count; i++)
+                {
+                    if (!((RadioButton)firstBlank.gender.Children[i]).IsChecked ?? false)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                genderType = "Male";
+                                break;
+                            case 1:
+                                genderType = "Female";
+                                break;
 
+                        }
+                    }
+                }
+                if (genderType == "")
+                {
+                    ErrorFillOut();
+                    return false;
+                }
+            }
+            
+            switch (categoryOfDeposit.SelectedIndex)
+            {
+                case 0:
+                    catOfDeposit = "Demand deposit";
+                    termOfDep = "No term";
+                    break;
+                case 1:
+                    catOfDeposit = "Term deposit";
+                    switch (termDeposit.SelectedIndex)
+                    {
+                        case 0:
+                            termOfDep = "1 month";
+                            break;
+                        case 1:
+                            termOfDep = "3 months";
+                            break;
+                        case 2:
+                            termOfDep = "6 months";
+                            break;
+                        case 3:
+                            termOfDep = "1 year";
+                            break;
+                        case 4:
+                            termOfDep = "3 years";
+                            break;
+                    }
+                    break;
+            }
             if (passwordField.Password.Length < 6)
             {
                 switch (mainwin.language)
@@ -145,7 +201,7 @@ namespace CourseM
                 switch (mainwin.language)
                 {
                     case MainWindow.ELanguage.english:
-                        MessageBox.Show("We cannot accept that sum. Reread the conditions of our bank again!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("We cannot accept that sum. Read the conditions of our bank again!", "Wrong", MessageBoxButton.OK, MessageBoxImage.Warning);
                         break;
                     case MainWindow.ELanguage.spanish:
                         MessageBox.Show("No podemos aceptar esa suma. ¡Vuelve a leer las condiciones de nuestro banco!", "Equivocado", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -161,51 +217,16 @@ namespace CourseM
         }
         private void CreateClient(object sender, RoutedEventArgs e)
         {
-            string genderType = firstBlank.genderType == "Mâle" || firstBlank.genderType == "Masculino"
-                || firstBlank.genderType == "Male" ? "Male" : "Female";
             
             int temp_int = 0;
             double temp_double = 0;
-            if (!CheckData(genderType, ref temp_int, ref temp_double))
+            string genderType = "";
+            string catOfDeposit = "";
+            string termOfDep = "";
+            if (!CheckData(genderType, catOfDeposit, termOfDep, ref temp_int, ref temp_double))
             {
                 return;
             }
-
-
-
-            string catOfDeposit = ((TextBlock)categoryOfDeposit.SelectedItem).Text;
-            string termOfDep;
-            if (catOfDeposit == "Demand deposit" || catOfDeposit == "Dépôt de la demande" || catOfDeposit == "Depósito a la vista")
-            {
-                catOfDeposit = "Demand deposit";
-                termOfDep = "No term";
-            }
-            else
-            {
-                catOfDeposit = "Term deposit";
-                switch (termDeposit.SelectedIndex)
-                {
-                    case 0:
-                        termOfDep = "1 month";
-                        break;
-                    case 1:
-                        termOfDep = "3 months";
-                        break;
-                    case 2:
-                        termOfDep = "6 months";
-                        break;
-                    case 3:
-                        termOfDep = "1 year";
-                        break;
-                    case 4:
-                        termOfDep = "3 years";
-                        break;
-                    default:
-                        return;
-                }
-
-            }
-
             string currency;
 
             switch (((TextBlock)firstBlank.currency.SelectedItem).Text[0])
@@ -339,9 +360,7 @@ namespace CourseM
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-            TextBlock boxItem = (TextBlock)comboBox.SelectedItem;
-            if (boxItem.Text == "Demand deposit")
+            if (categoryOfDeposit.SelectedIndex == 0 )
             {
                 termDeposit.IsEnabled = false;
             }

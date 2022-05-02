@@ -22,7 +22,7 @@ namespace CourseM
         MainWindow mainwin;
         Blank blank;
         DateTime dateTime;
-        public string genderType;
+        //public string genderType;
 
         public FirstBlank(MainWindow mainwin, Blank blank, string path)
         {
@@ -88,11 +88,6 @@ namespace CourseM
         {
             dateTime = (DateTime)datePicker.SelectedDate;
             dateLabel.Content = dateTime.ToString("d", CultureInfo.GetCultureInfo("de-De"));
-        }
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            RadioButton radiobut = (RadioButton)sender;
-            genderType = radiobut.Content.ToString();
         }
         private void SetButtonToolTip(Button butInfo)
         {

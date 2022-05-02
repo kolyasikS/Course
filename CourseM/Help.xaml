@@ -16,7 +16,7 @@
             <Setter Property="Background" Value="#FF4C4C4C"/>
             <Setter Property="BorderBrush" Value="#FF4C4C4C"/>
         </Style>
-        
+
         <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -98,47 +98,58 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
-    
+
+
 
     <Grid Background="#FF4C4C4C">
 
-        <TreeView Background="{x:Null}" Margin="20,30,527,29" BorderBrush="#FF06173C" FontFamily="Times New Roman" FontSize="18">
+        <TreeView x:Name="headers" Background="{x:Null}" Margin="20,30,527,29" BorderBrush="#FF06173C" FontFamily="Times New Roman" FontSize="18">
 
 
             <TreeViewItem IsSelected="False" Header="Users" Selected="TreeViewItem_Selected">
 
-                <TreeViewItem Header="Client" Selected="TreeViewInfo"/>
-                <TreeViewItem Header="Administrator" Selected="TreeViewInfo"/>
+                <TreeViewItem Header="Client" Selected="TreeViewInfo1"/>
+                <TreeViewItem Header="Administrator" Selected="TreeViewInfo1"/>
 
             </TreeViewItem>
             <TreeViewItem Header="Menu" Selected="TreeViewItem_Selected">        
 
-                <TreeViewItem Header="List of clients"  Selected="TreeViewInfo"/>
-                <TreeViewItem Header="Tables of information"  Selected="TreeViewInfo"/>         
-                <TreeViewItem Header="Change user"  Selected="TreeViewInfo"/>         
-                <TreeViewItem Header="Features"  Selected="TreeViewInfo"/>
+                <TreeViewItem Header="List of clients"  Selected="TreeViewInfo2"/>
+                <TreeViewItem Header="Tables of information"  Selected="TreeViewInfo2"/>         
+                <TreeViewItem Header="Change user"  Selected="TreeViewInfo2"/>         
+                <TreeViewItem Header="Features"  Selected="TreeViewInfo2"/>
 
             </TreeViewItem>
 
             <TreeViewItem Header="Register" FontSize="20" Selected="TreeViewItem_Selected">
                 <TreeViewItem Header="Conditions of the bank" Selected="TreeViewItem_Selected">         
                        
-                    <TreeViewItem Header="Deposit and withdraw"  Selected="TreeViewInfo"/>
-                    <TreeViewItem Header="Currencies"  Selected="TreeViewInfo"/>
-                    <TreeViewItem Header="Category of deposit"  Selected="TreeViewInfo"/>
-                    <TreeViewItem Header="Term of deposit"  Selected="TreeViewInfo"/>
+                    <TreeViewItem Header="Deposit and withdraw"  Selected="TreeViewInfo3"/>
+                    <TreeViewItem Header="Currencies"  Selected="TreeViewInfo3"/>
+                    <TreeViewItem Header="Category of deposit"  Selected="TreeViewInfo3"/>
+                    <TreeViewItem Header="Term of deposit"  Selected="TreeViewInfo3"/>
 
                 </TreeViewItem>
 
                 <TreeViewItem Header="Pages of blank" Selected="TreeViewItem_Selected">
 
-                    <TreeViewItem Header="First page"  Selected="TreeViewItem_Selected"/>
-                    <TreeViewItem Header="Second page" Selected="TreeViewItem_Selected"/>
+                    <TreeViewItem Header="First page"  Selected="TreeViewItem_Selected4"/>
+                    <TreeViewItem Header="Second page" Selected="TreeViewItem_Selected4"/>
 
                 </TreeViewItem>
             </TreeViewItem>
 
         </TreeView>
+
+        <Border BorderBrush="#FF32181F" BorderThickness="1"
+                Margin="355,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center" Width="481" Height="437">
+            <TextBlock x:Name="information" Margin="0,-1,0,0" >
+
+            </TextBlock>
+        </Border>
+
+
     </Grid>
 </Window>
