@@ -38,7 +38,7 @@ namespace CourseM
         public MainWindow()
         {
             _fileIO = new FileIO(PATH);
-            SavaLoadFile("load");
+            SaveLoadFile("load");
 
             InitializeComponent();
 
@@ -133,7 +133,7 @@ namespace CourseM
 
                 temp.isEndedTerm = ((Client)list.SelectedItem).isEndedTerm;
                 temp.amountOfMonth = ((Client)list.SelectedItem).amountOfMonth;
-                SavaLoadFile("save");
+                SaveLoadFile("save");
             }
             else
             {
@@ -141,7 +141,7 @@ namespace CourseM
                 UpdateTermDeposit((Client)list.SelectedItem);
 
                 temp.isEndedTerm = ((Client)list.SelectedItem).isEndedTerm;
-                SavaLoadFile("save");
+                SaveLoadFile("save");
             }
             numberOfAccount = temp.numOfAccount;
             temp.sum = Math.Round(((Client)list.SelectedItem).sum, 2);
@@ -184,7 +184,7 @@ namespace CourseM
                     break;
             }
             Clients.Remove((Client)list.SelectedItem);
-            SavaLoadFile("save");
+            SaveLoadFile("save");
         }
         private void Withdraw(object sender, RoutedEventArgs e)
         {
@@ -227,7 +227,7 @@ namespace CourseM
             }
             numberOfAccount = 0;
         }
-        private void SavaLoadFile(string choice)
+        private void SaveLoadFile(string choice)
         {
             if (choice == "load")
             {

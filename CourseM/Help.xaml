@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseM"
         mc:Ignorable="d"
-        Title="Help" Height="535" Width="874">
+        Title="Help" Height="535" Width="917" ResizeMode="NoResize">
 
     <Window.Resources>
         <Style TargetType="TreeViewItem">
@@ -103,7 +103,7 @@
 
     <Grid Background="#FF4C4C4C">
 
-        <TreeView x:Name="headers" Background="{x:Null}" Margin="20,30,527,29" BorderBrush="#FF06173C" FontFamily="Times New Roman" FontSize="18">
+        <TreeView x:Name="headers" Background="{x:Null}" Margin="20,30,567,29" BorderBrush="#FF06173C" FontFamily="Times New Roman" FontSize="18">
 
 
             <TreeViewItem IsSelected="False" Header="Users" Selected="TreeViewItem_Selected">
@@ -142,14 +142,95 @@
         </TreeView>
 
         <Border BorderBrush="#FF32181F" BorderThickness="1"
-                Margin="355,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center" Width="481" Height="437">
-            <TextBlock x:Name="information" Margin="0,-1,0,0" >
-
-            </TextBlock>
+                Margin="0,0,10,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center" Width="548" Height="437">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"  VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="information" TextWrapping="WrapWithOverflow" FontSize="20" Foreground="#FF070833" Padding="10 10 25 10" Width="546">
+                    
+                </TextBlock>
+            </ScrollViewer>
+            
         </Border>
-
-
+        <Canvas Height="436" Width="535" Margin="358,42,24,41">
+            <TextBlock x:Name="tableTB" Height="267" HorizontalAlignment="Center" Canvas.Top="146" VerticalAlignment="Top" Visibility="Collapsed">
+                <FlowDocumentScrollViewer x:Name ="tableFDR" Height="266" Width="536" IsToolBarVisible="False" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <FlowDocument x:Name="tableFD">
+                        <Table CellSpacing="5">
+                            <Table.Columns>
+                                <TableColumn Width="100"/>
+                                <TableColumn Width="60"/>
+                                <TableColumn Width="60"/>
+                                <TableColumn Width="60"/>
+                                <TableColumn Width="60"/>
+                                <TableColumn Width="60"/>
+                                <TableColumn Width="60"/>
+                            </Table.Columns>
+                            <TableRowGroup>
+                            <TableRow Background="DarkGoldenrod">
+                                <TableCell ColumnSpan="7" TextAlignment="Center">
+                                <Paragraph FontSize="18" FontWeight="Bold">Table of currencies</Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow Background="DarkGray">
+                                <TableCell><Paragraph FontSize="13" TextAlignment="Center">Term Currencies</Paragraph></TableCell>
+                                <TableCell><Paragraph FontSize="13" TextAlignment="Center">1 month</Paragraph></TableCell>
+                                <TableCell><Paragraph FontSize="13" TextAlignment="Center">3 months</Paragraph></TableCell>
+                                <TableCell><Paragraph FontSize="13" TextAlignment="Center">6 months</Paragraph></TableCell>
+                                <TableCell><Paragraph FontSize="13" TextAlignment="Center">1 year (Demand)</Paragraph></TableCell>
+                                <TableCell><Paragraph FontSize="13" TextAlignment="Center">1 year (Term)</Paragraph></TableCell>
+                                <TableCell><Paragraph FontSize="13" TextAlignment="Center">3 years</Paragraph></TableCell>
+                            </TableRow>
+                            <TableRow Background="DimGray" FontFamily="TimesNewRoman">
+                                <TableCell><Paragraph FontSize="15">Pound sterling (GBP)</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.01</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.015</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.02</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.025</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.027</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.03</Paragraph></TableCell>
+                            </TableRow>
+                            <TableRow Background="DimGray" FontFamily="TimesNewRoman">
+                                <TableCell><Paragraph FontSize="15">Euro (EUR)</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.02</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.026</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.032</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.04</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.042</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.046</Paragraph></TableCell>
+                            </TableRow>
+                            <TableRow Background="DimGray" FontFamily="TimesNewRoman">
+                                <TableCell><Paragraph TextAlignment="Left" FontSize="15">US dollar (USD)</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.025</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.032</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.039</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.044</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.046</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.053</Paragraph></TableCell>
+                            </TableRow>
+                            <TableRow Background="DimGray" FontFamily="TimesNewRoman">
+                                <TableCell><Paragraph TextAlignment="Left" FontSize="15">Japanese yen (JPY)</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.03</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.038</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.046</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.052</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.054</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.062</Paragraph></TableCell>
+                            </TableRow>     
+                            <TableRow Background="DimGray" FontFamily="TimesNewRoman">
+                                <TableCell><Paragraph TextAlignment="Left" FontSize="15">S Korean won (KRW)</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.035</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.045</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.055</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.063</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.065</Paragraph></TableCell>
+                                <TableCell><Paragraph TextAlignment="Center">0.075</Paragraph></TableCell>
+                            </TableRow>
+                            </TableRowGroup>
+                        </Table>
+                    </FlowDocument>
+                </FlowDocumentScrollViewer>
+            </TextBlock>
+        </Canvas>
     </Grid>
 </Window>
