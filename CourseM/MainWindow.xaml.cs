@@ -213,7 +213,7 @@ namespace CourseM
             passport.Text = "";
             accountData.Text = "";
 
-            switch(language)
+            switch (language)
             {
                 case ELanguage.english:
                     lastOperation.Content = "Last operation was carried out at\n";
@@ -336,7 +336,7 @@ namespace CourseM
             }
 
 
-            
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -375,13 +375,14 @@ namespace CourseM
                 isAdmin = false;
                 registerButton.IsEnabled = true;
                 withdraw_deposit.IsEnabled = true;
-                ShowEnteredUser(false); }
+                ShowEnteredUser(false);
+            }
         }
         private void ShowEnteredUser(bool _isAdmin)
         {
             if (_isAdmin)
             {
-                switch(language)
+                switch (language)
                 {
                     case ELanguage.english:
                         IsUser.Content = "You entered as an Administrator";
@@ -415,9 +416,9 @@ namespace CourseM
             // MainWindow 
             this.Title = "Bank";
 
-            TitleAccountData.Text  = "Bank account DATA";
+            TitleAccountData.Text = "Bank account DATA";
             TitlePassportData.Text = "Passport DATA";
-            lastOperation.Content  = "Last operation was carried out at\n";
+            lastOperation.Content = "Last operation was carried out at\n";
 
             login.Content = "Log in";
             registerButton.Content = "Register";
@@ -520,7 +521,7 @@ namespace CourseM
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if(e.Key == Key.F1)
+            if (e.Key == Key.F1)
             {
                 Help help = new Help();
                 if (help.IsActive)
