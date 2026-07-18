@@ -118,9 +118,6 @@ namespace CourseM
                 temp.isEndedTerm = ((Client)list.SelectedItem).isEndedTerm;
                 SavaLoadFile("save");
             }
-
-
-            
             numberOfAccount = temp.numOfAccount;
             temp.sum = Math.Round(((Client)list.SelectedItem).sum, 2);
 
@@ -163,8 +160,7 @@ namespace CourseM
             accountData.Text = "";
             lastOperation.Content = "Last operation was carried out at\n";
             numberOfAccount = 0;
-
-    }
+        }
         private void SavaLoadFile(string choice)
         {
             if (choice == "load")
